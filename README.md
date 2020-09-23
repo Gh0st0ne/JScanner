@@ -30,10 +30,10 @@ Enjoy bug hunting
 ```
 
 ## Example
-Scan a single URLs  
+1. Scan a single URLs  
 * ```JScanner -w <(echo 'google.com') -oD `pwd` -t 1 -d google.com```  
-Scan from URLs  
-* ```JScanner -w /tmp/files.txt -oD `pwd` -t 10 -d anydomainnameinfiles.txt.com```  
+2. Scan from URLs   
+* ```JScanner -w /tmp/files.txt -oD `pwd` -t 10 -d anydomainnameinfiles.txt.com```   
 
 ## Caveats
 1. Only scans inline javascript when non js endpoint is given
