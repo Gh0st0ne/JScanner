@@ -27,16 +27,18 @@ def starter(argv):
     else:
         return [line.rstrip('\n').strip(' ') for line in open(argv.wordlist) if line]
 
-def output_writer(filepath, filename, to_write):
+def output_directory_writer(filepath, filename, to_write):
     output_file = open(FPathApp.slasher(argv.output_directory) + argv.domain + '.jscan', 'a')
-    for jsresult in to_write:
-        output_file.write(jsresult)
+    for jsresults in to_write:
+        for jsresult in jsresults.result():
+            output_file.write(jsresult)
     output_file.close()
 
 def output_writer(filename, to_write):
     output_file = open(filename, 'a')
-    for jsresult in to_write:
-        output_file.write(jsresult)
+    for jsresults in to_write:
+        for jsresult in jsresults.result():
+            output_file.write(jsresult)
     output_file.close()
 
 def manage_output(line) -> tuple:

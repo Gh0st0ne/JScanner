@@ -10,6 +10,7 @@ from argparse import ArgumentParser
 from concurrent.futures import ThreadPoolExecutor
 
 from lib.Functions import starter, manage_output
+from lib.Functions import output_directory_writer, output_writer
 from lib.PathFunctions import PathFunction
 from lib.Globals import *
 
@@ -40,13 +41,13 @@ def scan_js(url: str) -> bool:
             for jsline in jstext:
                 for dom_source in dom_sources_regex:
                     if search(dom_source, jsline):
-                        print(f"{ColorObj.good} Found sensitive data: {colored(jsline, color='cyan')}")
-                        output_list.append(manage_output(f"{jsline.strip(' ')} <--- From regex {dom_source}\n"))
+                        print(f"{ColorObj.good} Found sensitive data: {colored(jsline.strip(' '), color='cyan')}")
+                        output_list.append(manage_output(f"{jsline.strip(' ')} <--- DomXSS Source {dom_source}\n"))
                 for dom_sink in dom_sinks_regex:
                     if search(dom_sink, jsline):
-                        print(f"{ColorObj.good} Found sensitive data: {colored(jsline, color='cyan')}")
-                        output_list.append(manage_output(f"{jsline.strip(' ')} <--- From regex {dom_sink}\n"))
-            return True
+                        print(f"{ColorObj.good} Found sensitive data: {colored(jsline.strip(' '), color='cyan')}")
+                        output_list.append(manage_output(f"{jsline.strip(' ')} <--- DomXSS Sink {dom_sink}\n"))
+            return output_list
         except Exception as E:
             print(f"{ColorObj.bad} Exception {E},{E.__class__} occured")
             return False
@@ -64,23 +65,27 @@ def scan_js(url: str) -> bool:
                     for jsline in jstext:
                         for dom_source in dom_sources_regex:
                             if search(dom_source, jsline):
-                                print(f"{ColorObj.good} Found sensitive data: {colored(jsline, color='cyan')}")
-                                output_list.append(manage_output(f"{jsline} <--- From regex {dom_source}\n"))
+                                print(f"{ColorObj.good} Found sensitive data: {colored(jsline.strip(' '), color='cyan')}")
+                                output_list.append(manage_output(f"{jsline} <--- DomXSS Source {dom_source}\n"))
                         for dom_sink in dom_sinks_regex:
                             if search(dom_sink, jsline):
-                                print(f"{ColorObj.good} Found sensitive data: {colored(jsline, color='cyan')}")
-                                output_list.append(manage_output(f"{jsline} <--- From regex {dom_sink}\n"))
-            return True
+                                print(f"{ColorObj.good} Found sensitive data: {colored(jsline.strip(' '), color='cyan')}")
+                                output_list.append(manage_output(f"{jsline} <--- DomXSS Sink {dom_sink}\n"))
+            return output_list
         except Exception as E:
             print(f"{ColorObj.bad} Exception {E},{E.__class__} occured")
             return False
-try:
-    def main():
-        global input_wordlist
-        with ThreadPoolExecutor(max_workers=argv.threads) as submitter:
-            submitter.submit(scan_js, input_wordlist)
+def main():
+    global input_wordlist
+    with ThreadPoolExecutor(max_workers=argv.threads) as submitter:
+        future_objects = [submitter.submit(scan_js, inputs) for inputs in input_wordlist]
+        if argv.output_directory:
+            output_writer(argv.output_directory, argv.domain, future_objects)
+        if argv.output:
+            output_writer(argv.output, future_objects)
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
+    try:
         main()
-except Exception as E:
-    print(E,E.__class__)
+    except Exception as E:
+        print(E,E.__class__)
