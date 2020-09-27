@@ -1,6 +1,0 @@
-http://gym-club.crossfit.htb/vendor/tilt/tilt.jquery.min.js                                                                                <--- URL
-}), this.timeout = setTimeout(function() {                                                                              <--- DomXSS Sink setTimeout
-this.mousePositions = r.call(this), this.settings = t(this).data("settings"), l.call(this), setTimeout(function() {     <--- DomXSS Sink setTimeout
-http://gym-club.crossfit.htb/vendor/tilt/tilt.jquery.min.js                                                                                <--- URL
-}), this.timeout = setTimeout(function() {                                                                              <--- DomXSS Sink setTimeout
-this.mousePositions = r.call(this), this.settings = t(this).data("settings"), l.call(this), setTimeout(function() {     <--- DomXSS Sink setTimeout
