@@ -10,29 +10,10 @@ Fast and effective tool to find using custom and predefined regex for vulnerabil
 
 ## Usage
 ```
-usage: JScanner [-h] [-w WORDLIST] [-oD OUTPUT_DIRECTORY] [-d DOMAIN] [-t THREADS] [-b]
-
-Javascript Scanner
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -w WORDLIST, --wordlist WORDLIST
-                        Absolute path of wordlist
-  -oD OUTPUT_DIRECTORY, --output-directory OUTPUT_DIRECTORY
-                        Output directory
-  -d DOMAIN, --domain DOMAIN
-                        Domain name
-  -t THREADS, --threads THREADS
-                        Number of threads
-  -b, --banner          Print banner and exit
-
-Enjoy bug hunting
-```
-```
 usage: JScanner [-h] [--- | -w WORDLIST] [-d DOMAIN]
                 [-oD OUTPUT_DIRECTORY | -o OUTPUT] [-t THREADS] [-b]
 
-[33mJavascript Scanner[0m
+Javascript Scanner
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -49,7 +30,7 @@ optional arguments:
                         Number of threads
   -b, --banner          Print banner and exit
 
-[33mEnjoy bug hunting[0m
+Enjoy bug hunting
 ```
 
 ## Example
