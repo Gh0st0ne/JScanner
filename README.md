@@ -41,7 +41,7 @@ Enjoy bug hunting
 3. Scan from stdin (subdomains)
 * ```assetfinder google.com | JScanner --- -o results.txt```
 4. Scan from stdin (hakrawler, gau both at same time)
-* ```echo "uber.com" | tee >(hakrawler | JScanner --- -o hakrawler.txt -t 10) >(gau | JScanner --- -o gau.txt -t 10)
+* ```echo "uber.com" | tee >(hakrawler | JScanner --- -o hakrawler.txt -t 10) >(gau | JScanner --- -o gau.txt -t 10)```
 
 ## Caveats
 1. Only scans inline javascript when non js endpoint is given
