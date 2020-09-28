@@ -7,6 +7,7 @@ Fast and effective tool to find using custom and predefined regex for vulnerabil
 2. Predefined regex as well as custom regex definable in in lib/Globals.py.
 3. Regex for DOM XSS sinks, sources, web services, interesting variable already included.
 4. Shannon entropy to catch whats missed by regex.
+5. Though GIL might slow down its speed, its built with faster_than_requests, 39 times faster than original requests.
 
 ## Usage
 ```
