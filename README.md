@@ -1,10 +1,10 @@
 # JScanner
 ## Description
-Threaded scanning of urls mostly .js url for secrets and vulnerabilites. Scans JS even on non .js endpoint. Useful for scripting with other command while still saving to a file.
+Fast and effective tool to find using custom and predefined regex for vulnerabilites and secrets.It scans concurrently and effectively mostly `.js` url for secrets and vulnerabilites. Scans JS even on non `.js` endpoint. Output from other tools can be easily fed to it.
 
 ## Features
 1. Concurrent scanning of all any endpoints for javascript.
-2. Define your own regex in lib/Globals.py.
+2. Predefined regex as well as custom regex definable in in lib/Globals.py.
 3. Regex for DOM XSS sinks, sources, web services, interesting variable already included.
 4. Shannon entropy to catch whats missed by regex.
 
