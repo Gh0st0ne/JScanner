@@ -30,10 +30,14 @@ Enjoy bug hunting
 ```
 
 ## Example
-1. Scan a single URLs  
-* ```JScanner -w <(echo 'google.com') -oD `pwd` -t 1 -d google.com```  
-2. Scan from URLs   
-* ```JScanner -w /tmp/files.txt -oD `pwd` -t 10 -d anydomainnameinfiles.txt.com```   
+1. Scan a single URL/Domain/Subdomain  
+* ```JScanner -d google.com```  
+2. Scan from URLs
+* ```JScanner -w /tmp/files.txt -oD `pwd` -t 10 -d domain.com```
+3. Scan from stdin (subdomains)
+* ```assetfinder google.com | JScanner --- -o results.txt```
+4. Scan from stdin (hakrawler, gau both at same time)
+* ```echo "uber.com" | tee >(hakrawler | JScanner --- -o hakrawler.txt -t 10) >(gau | JScanner --- -o gau.txt -t 10)
 
 ## Caveats
 1. Only scans inline javascript when non js endpoint is given
