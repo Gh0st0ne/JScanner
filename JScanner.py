@@ -2,6 +2,7 @@
 
 from re import search
 from requests import get
+from faster_than_requests import get
 from termcolor import colored
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
@@ -36,8 +37,8 @@ def scan_js(url: str) -> bool:
             jsurl = FPathApp.slasher(FPathApp.urler(urlparser.netloc)) + FPathApp.payloader(urlparser.path)
             print(f"{ColorObj.information} Trying to get data from {colored(jsurl, color='cyan')}")
             output_list.append(manage_output(f"{jsurl}  <--- URL\n"))
-            jsreq = get(jsurl)
-            jstext = str(beautify(jsreq.text)).split('\n')
+            jsresp = get(jsurl)
+            jstext = str(beautify(jsresp["body"])).split('\n')
             for jsline in jstext:
                 for dom_source in dom_sources_regex:
                     if search(dom_source, jsline):
@@ -56,8 +57,8 @@ def scan_js(url: str) -> bool:
             jsurl = FPathApp.slasher(FPathApp.urler(urlparser.netloc)) + FPathApp.payloader(urlparser.path)
             print(f"{ColorObj.information} Trying to get data from {colored(jsurl, color='cyan')}")
             output_list.append(manage_output(f"{jsurl} <--- URL\n"))
-            jsreq = get(jsurl)
-            jsx = BeautifulSoup(jsreq.text, 'html.parser')
+            jsresp = get(jsurl)
+            jsx = BeautifulSoup(jsresp["body"], 'html.parser')
             jssoup = jsx.find_all("script")
             for jscript in jssoup:
                 if jscript != None:
