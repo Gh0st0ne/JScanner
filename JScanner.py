@@ -41,11 +41,11 @@ def scan_js(url: str) -> bool:
             for jsline in jstext:
                 for dom_source in dom_sources_regex:
                     if search(dom_source, jsline):
-                        print(f"{ColorObj.good} Found sensitive data: {colored(jsline.strip(' '), color='cyan')}")
+                        print(f"{ColorObj.good} Found Dom XSS Source: {colored(jsline.strip(' '), color='cyan')}")
                         output_list.append(manage_output(f"{jsline.strip(' ')} <--- DomXSS Source {dom_source}\n"))
                 for dom_sink in dom_sinks_regex:
                     if search(dom_sink, jsline):
-                        print(f"{ColorObj.good} Found sensitive data: {colored(jsline.strip(' '), color='cyan')}")
+                        print(f"{ColorObj.good} Found Dom XSS Sink: {colored(jsline.strip(' '), color='cyan')}")
                         output_list.append(manage_output(f"{jsline.strip(' ')} <--- DomXSS Sink {dom_sink}\n"))
             return output_list
         except Exception as E:
@@ -55,7 +55,7 @@ def scan_js(url: str) -> bool:
         try:
             jsurl = FPathApp.slasher(FPathApp.urler(urlparser.netloc)) + FPathApp.payloader(urlparser.path)
             print(f"{ColorObj.information} Trying to get data from {colored(jsurl, color='cyan')}")
-            output_file.write(manage_output(f"{jsurl} <--- URL\n"))
+            output_list.append(manage_output(f"{jsurl} <--- URL\n"))
             jsreq = get(jsurl)
             jsx = BeautifulSoup(jsreq.text, 'html.parser')
             jssoup = jsx.find_all("script")
@@ -65,11 +65,11 @@ def scan_js(url: str) -> bool:
                     for jsline in jstext:
                         for dom_source in dom_sources_regex:
                             if search(dom_source, jsline):
-                                print(f"{ColorObj.good} Found sensitive data: {colored(jsline.strip(' '), color='cyan')}")
+                                print(f"{ColorObj.good} Found Dom XSS Source: {colored(jsline.strip(' '), color='cyan')}")
                                 output_list.append(manage_output(f"{jsline} <--- DomXSS Source {dom_source}\n"))
                         for dom_sink in dom_sinks_regex:
                             if search(dom_sink, jsline):
-                                print(f"{ColorObj.good} Found sensitive data: {colored(jsline.strip(' '), color='cyan')}")
+                                print(f"{ColorObj.good} Found Dom XSS Sink: {colored(jsline.strip(' '), color='cyan')}")
                                 output_list.append(manage_output(f"{jsline} <--- DomXSS Sink {dom_sink}\n"))
             return output_list
         except Exception as E:

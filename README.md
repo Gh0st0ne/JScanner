@@ -41,3 +41,6 @@ Enjoy bug hunting
 3. Output need to be improved
 4. Argument to scan .js file only
 5. Shannon Entropy to be implemented.
+
+## Warning
+Currently under development and do contain bugs
