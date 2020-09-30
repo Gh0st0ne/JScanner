@@ -1,0 +1,6 @@
+argparse
+beautifulsoup4
+bs4
+faster_than_requests
+jsbeautifier
+termcolor

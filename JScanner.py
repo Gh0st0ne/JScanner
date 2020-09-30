@@ -1,89 +1,73 @@
 #!/usr/bin/python3
 
-from re import search
-from requests import get
-from faster_than_requests import get
 from termcolor import colored
-from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-from jsbeautifier import beautify
+from re import search, IGNORECASE
 from argparse import ArgumentParser
 from concurrent.futures import ThreadPoolExecutor
 
-from lib.Functions import starter, manage_output
+from lib.Globals import *
+from lib.Engine import Engine
+from lib.Functions import starter, manage_output, shannon_entropy
 from lib.Functions import output_directory_writer, output_writer
 from lib.PathFunctions import PathFunction
-from lib.Globals import *
 
 parser = ArgumentParser(description=colored('Javascript Scanner', color='yellow'), epilog=colored("Enjoy bug hunting", color='yellow'))
 input_group = parser.add_mutually_exclusive_group()
 output_group = parser.add_mutually_exclusive_group()
 input_group.add_argument('---', '---', action="store_true", dest="stdin", help="Stdin")
 input_group.add_argument('-w', '--wordlist', type=str, help='Absolute path of wordlist')
-parser.add_argument('-d', '--domain', type=str, help="Domain name")
+input_group.add_argument('-u', '--url', type=str, help="URL to scan (-d not necessary when -u specified)")
+parser.add_argument('-d', '--domain', type=str, help="URL")
 output_group.add_argument('-oD', '--output-directory', type=str, help="Output directory")
 output_group.add_argument('-o', '--output', type=str, help="Output file")
 parser.add_argument('-t', '--threads', type=int, help="Number of threads")
-parser.add_argument('-b', '--banner', action="store_true", help="Print banner and exit")
+parser.add_argument('--banner', action="store_true", help="Print banner and exit")
 argv = parser.parse_args()
-input_wordlist = starter(argv)
 
-def scan_js(url: str) -> bool:
-    FPathApp = PathFunction()
+JSE = Engine()
+input_wordlist = starter(argv)
+FPathApp = PathFunction()
+
+def scan_url(url) -> bool:
+    jsurl = FPathApp.urler(url)
     output_list = []
-    urlparser = urlparse(url)
+    print(f"{ColorObj.information} Trying to get data from {colored(jsurl, color='cyan')}")
+    output_list.append((f"URL: {jsurl}\n\n"))
+    urlparser = urlparse(jsurl)
+    (lambda __after: [__after() for argv.domain in [(urlparser.netloc)]][0] if urlparser.netloc and not argv.domain else __after())(lambda: None)
     if search(".*\.js$", urlparser.path):
-        try:
-            jsurl = FPathApp.slasher(FPathApp.urler(urlparser.netloc)) + FPathApp.payloader(urlparser.path)
-            print(f"{ColorObj.information} Trying to get data from {colored(jsurl, color='cyan')}")
-            output_list.append(manage_output(f"{jsurl}  <--- URL\n"))
-            jsresp = get(jsurl)
-            jstext = str(beautify(jsresp["body"])).split('\n')
-            for jsline in jstext:
-                for dom_source in dom_sources_regex:
-                    if search(dom_source, jsline):
-                        print(f"{ColorObj.good} Found Dom XSS Source: {colored(jsline.strip(' '), color='cyan')}")
-                        output_list.append(manage_output(f"{jsline.strip(' ')} <--- DomXSS Source {dom_source}\n"))
-                for dom_sink in dom_sinks_regex:
-                    if search(dom_sink, jsline):
-                        print(f"{ColorObj.good} Found Dom XSS Sink: {colored(jsline.strip(' '), color='cyan')}")
-                        output_list.append(manage_output(f"{jsline.strip(' ')} <--- DomXSS Sink {dom_sink}\n"))
-            return output_list
-        except Exception as E:
-            print(f"{ColorObj.bad} Exception {E},{E.__class__} occured")
-            return False
-    if not search(".*\.js$", urlparser.path):
-        try:
-            jsurl = FPathApp.slasher(FPathApp.urler(urlparser.netloc)) + FPathApp.payloader(urlparser.path)
-            print(f"{ColorObj.information} Trying to get data from {colored(jsurl, color='cyan')}")
-            output_list.append(manage_output(f"{jsurl} <--- URL\n"))
-            jsresp = get(jsurl)
-            jsx = BeautifulSoup(jsresp["body"], 'html.parser')
-            jssoup = jsx.find_all("script")
-            for jscript in jssoup:
-                if jscript != None:
-                    jstext = str(beautify(jscript.string)).split('\n')
-                    for jsline in jstext:
-                        for dom_source in dom_sources_regex:
-                            if search(dom_source, jsline):
-                                print(f"{ColorObj.good} Found Dom XSS Source: {colored(jsline.strip(' '), color='cyan')}")
-                                output_list.append(manage_output(f"{jsline} <--- DomXSS Source {dom_source}\n"))
-                        for dom_sink in dom_sinks_regex:
-                            if search(dom_sink, jsline):
-                                print(f"{ColorObj.good} Found Dom XSS Sink: {colored(jsline.strip(' '), color='cyan')}")
-                                output_list.append(manage_output(f"{jsline} <--- DomXSS Sink {dom_sink}\n"))
-            return output_list
-        except Exception as E:
-            print(f"{ColorObj.bad} Exception {E},{E.__class__} occured")
-            return False
+        jstext = JSE.returnjs_fromjs(jsurl)
+    elif not search(".*\.js$", urlparser.path):
+        jstext = JSE.returnjs_fromhtml(jsurl)
+
+    for line in jstext:
+        line = line.strip(' ').rstrip('{').rstrip(' ').lstrip('}').lstrip(' ')
+        for dom_source in dom_sources_regex:
+            if search(dom_source, line, IGNORECASE):
+                print(f"{ColorObj.good} Found Dom XSS Source: {colored(line.strip(' '), color='cyan')}")
+                output_list.append(manage_output(f"{line.strip(' ')} <--- DomXSS Source {dom_source}\n", color=dom_source))
+        for dom_sink in dom_sinks_regex:
+            if search(dom_sink, line, IGNORECASE):
+                print(f"{ColorObj.good} Found Dom XSS Sink: {colored(line.strip(' '), color='cyan')}")
+                output_list.append(manage_output(f"{line.strip(' ')} <--- DomXSS Sink {dom_sink}\n", color=dom_sink))
+        if argv.domain:
+            subdomain = subdomain_regex(argv.domain)
+            if search(subdomain, line, IGNORECASE):
+                actual_sub = [word for word in line.split(' ') if search(subdomain, word, IGNORECASE)][0].replace(';', '').strip('"').strip("'")
+                print(f"{ColorObj.good} Found subdomain: {colored(actual_sub, color='cyan')}")
+                output_list.append(manage_output(f"{actual_sub} <--- SubRegex {subdomain}\n", color=actual_sub))
+        for word in line.split(' '):
+            if len(word) > 5:
+                if float(shannon_entropy(word, base64char)) > float(3.3) or float(shannon_entropy(word, hexchar)) > float(3.3):
+                    print(f"{ColorObj.good} Found sensitive data: {colored(word, color='cyan')}")
+                    output_list.append(manage_output(f"{word} <--- Entropy greater than 3.3\n"))
+    return output_list
+    
 def main():
-    global input_wordlist
     with ThreadPoolExecutor(max_workers=argv.threads) as submitter:
-        future_objects = [submitter.submit(scan_js, inputs) for inputs in input_wordlist]
-        if argv.output_directory:
-            output_writer(argv.output_directory, argv.domain, future_objects)
-        if argv.output:
-            output_writer(argv.output, future_objects)
+        future_objects = [submitter.submit(scan_url, inputs) for inputs in input_wordlist]
+    (lambda __after: (output_writer(argv.output_directory, argv.domain, future_objects), __after())[1] if argv.output_directory else __after())(lambda: (lambda __after: (output_writer(argv.output, future_objects), __after())[1] if argv.output else __after())(lambda: None)) #Output
 
 if __name__ == "__main__":
     try:

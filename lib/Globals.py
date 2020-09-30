@@ -38,25 +38,27 @@ dom_sinks_regex = [
 'ScriptElement.textContent',
 'ScriptElement.innerText',
 'document.write',
-'document.writeln'
+'document.writeln',
 ]
 
 others_regex = [
 'API',
 'key',
-'secretKey'
+'secretKey',
 ]
 
-#add 0-9 in regex
 web_services_regex = [
-'([a-zA-Z-.]*s3[a-zA-Z-.]*\.?amazonaws\.com\/?[a-zA-Z-.]*)',
-'([a-zA-Z-.]*?storage\.googleapis\.com\/?[a-zA-Z-.]*)',
-'([a-zA-Z-.]*?digitaloceanspaces\.com\/?[a-zA-Z-.]*)',
-'([a-zA-Z-.]*?blob\.core\.windows\.net\/?[a-zA-Z-.]*)'
+'([0-9a-zA-Z-.]*s3[a-zA-Z-.]*\.?amazonaws\.com\/?[a-zA-Z-.]*)',
+'([0-9a-zA-Z-.]*?storage\.googleapis\.com\/?[a-zA-Z-.]*)',
+'([0-9a-zA-Z-.]*?digitaloceanspaces\.com\/?[a-zA-Z-.]*)',
+'([0-9a-zA-Z-.]*?blob\.core\.windows\.net\/?[a-zA-Z-.]*)',
 ]
 
 skip_js_regex = [
 '.*jquery.*'
 ]
 
+hexchar = "1234567890abcdefABCDEF"
+base64char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 ColorObj = Color()
+
