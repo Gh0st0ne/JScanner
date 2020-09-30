@@ -4,3 +4,4 @@
 * Fixed bugs and stability and LOC is severely reduced. Processing speed increased!
 * More regexes are in process so more detection. Also regexes are case insensitive now!
 * Code is more cleaner and several variables renaming
+* Colorful output avialable now
