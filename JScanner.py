@@ -32,15 +32,19 @@ FPathApp = PathFunction()
 def scan_url(url) -> bool:
     jsurl = FPathApp.urler(url)
     output_list = []
-    print(f"{ColorObj.information} Trying to get data from {colored(jsurl, color='cyan')}")
-    output_list.append((f"URL: {jsurl}\n\n"))
+    print(f"{ColorObj.information} Getting data from {colored(jsurl, color='cyan')}")
+    output_list.append((f"URL: {colored(jsurl, color='yellow', attrs=['bold'])}\n\n"))
     urlparser = urlparse(jsurl)
     (lambda __after: [__after() for argv.domain in [(urlparser.netloc)]][0] if urlparser.netloc and not argv.domain else __after())(lambda: None)
     if search(".*\.js$", urlparser.path):
         jstext = JSE.returnjs_fromjs(jsurl)
+        jscomments = None
     elif not search(".*\.js$", urlparser.path):
-        jstext = JSE.returnjs_fromhtml(jsurl)
-
+        jstext, jscomments = JSE.returnjs_fromhtml(jsurl)
+    if jscomments:
+        for jscomment in jscomments:
+            print(f"{ColorObj.good} Comments: {colored(jscomment.strip(' '), color='cyan')}")
+            output_list.append(manage_output(f"{jscomment.strip(' ')} <--- Comments\n"))
     for line in jstext:
         line = line.strip(' ').rstrip('{').rstrip(' ').lstrip('}').lstrip(' ')
         for dom_source in dom_sources_regex:

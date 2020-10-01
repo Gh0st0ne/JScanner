@@ -1,3 +1,5 @@
+# Version 2.1
+* Comments parsing added from html
 # Version 2.0
 * Reverted back to original requests due to [Faster_than_requests error](https://github.com/juancarlospaco/faster-than-requests/issues/93)
 * Entirely changed JScanner.py with new class called Engine
@@ -6,3 +8,4 @@
 * Code is more cleaner and several variables renaming
 * Colorful output avialable now
 * Also, duplicate issue is now fixed!
+
