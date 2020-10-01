@@ -47,21 +47,24 @@ def scan_url(url) -> bool:
             if search(dom_source, line, IGNORECASE):
                 print(f"{ColorObj.good} Found Dom XSS Source: {colored(line.strip(' '), color='cyan')}")
                 output_list.append(manage_output(f"{line.strip(' ')} <--- DomXSS Source {dom_source}\n", color=dom_source))
+                continue
         for dom_sink in dom_sinks_regex:
             if search(dom_sink, line, IGNORECASE):
                 print(f"{ColorObj.good} Found Dom XSS Sink: {colored(line.strip(' '), color='cyan')}")
                 output_list.append(manage_output(f"{line.strip(' ')} <--- DomXSS Sink {dom_sink}\n", color=dom_sink))
+                continue
         if argv.domain:
             subdomain = subdomain_regex(argv.domain)
             if search(subdomain, line, IGNORECASE):
                 actual_sub = [word for word in line.split(' ') if search(subdomain, word, IGNORECASE)][0].replace(';', '').strip('"').strip("'")
                 print(f"{ColorObj.good} Found subdomain: {colored(actual_sub, color='cyan')}")
                 output_list.append(manage_output(f"{actual_sub} <--- SubRegex {subdomain}\n", color=actual_sub))
+                continue
         for word in line.split(' '):
             if len(word) > 5:
                 if float(shannon_entropy(word, base64char)) > float(3.3) or float(shannon_entropy(word, hexchar)) > float(3.3):
                     print(f"{ColorObj.good} Found sensitive data: {colored(word, color='cyan')}")
-                    output_list.append(manage_output(f"{word} <--- Entropy greater than 3.3\n"))
+                    output_list.append(manage_output(f"{word} <--- Entropy \n"))
     return output_list
     
 def main():

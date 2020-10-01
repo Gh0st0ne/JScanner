@@ -1,6 +1,6 @@
 URL: http://localhost/example.js
 
 [31mdocument.write[0m("<script>alert(1)</script>");                                                                        <--- DomXSS Sink document.write
-"http://data-flood.s3-website-us-east-1.amazonaws.com/";                                                              <--- Entropy greater than 4.5
+"http://data-flood.s3-website-us-east-1.amazonaws.com/";                                                              <--- Entropy greater than 3.3
 [31ma.b.c.d.e.f.yahoo.com[0m                                                                                           <--- SubRegex (.*\.)?yahoo.com(\.)?
-"810a5bdaafc6dd30b1d9979215935871";                                                                                   <--- Entropy greater than 4.5
+"810a5bdaafc6dd30b1d9979215935871";                                                                                   <--- Entropy greater than 3.3

@@ -5,3 +5,4 @@
 * More regexes are in process so more detection. Also regexes are case insensitive now!
 * Code is more cleaner and several variables renaming
 * Colorful output avialable now
+* Also, duplicate issue is now fixed!
