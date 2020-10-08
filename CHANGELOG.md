@@ -1,5 +1,9 @@
+# Version 2.8
+* Compiled dynamically linked binary now available! 
+
 # Version 2.7
 * Exline scripts parsing and printing
+* Other small variables changes
 
 # Version 2.6
 * Shannon entropy rebalanced
