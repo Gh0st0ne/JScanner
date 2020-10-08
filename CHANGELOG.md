@@ -1,3 +1,12 @@
+# Version 2.6
+* Shannon entropy rebalanced
+* New functions in JSExtract with extracting as much as necessary data. eg "endpoint" or 'endpoint' will be shown as endpoint.
+* Also, single_path_regex is added
+
+# Version 2.5
+* Path regex improved and new test case
+* Test case detection further improved
+
 # Version 2.4
 * Traceback added for error debuggging
 * Path regex added and to be implemented

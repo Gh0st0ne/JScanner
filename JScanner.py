@@ -7,7 +7,6 @@ from traceback import format_exc
 from argparse import ArgumentParser
 from concurrent.futures import ThreadPoolExecutor
 
-from lib.Globals import *
 from lib.Functions import starter
 from lib.Functions import output_directory_writer, output_writer
 from lib.JSExtract import JSExtract

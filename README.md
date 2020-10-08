@@ -1,13 +1,13 @@
 # JScanner
 ## Description
-Fast and effective tool to find using custom and predefined regex for vulnerabilites and secrets.It scans concurrently and effectively mostly `.js` url for secrets and vulnerabilites. Scans JS even on non `.js` endpoint. Output from other tools can be easily fed to it.
+Fast and effective tool to find using custom and predefined regex for vulnerabilites and secrets. It scans concurrently and effectively on javascript files url for secrets and vulnerabilites. Scans JS even on non javascript endpoint. Output from other tools can be easily fed to it.
 
 ## Features
 1. Concurrent scanning of all any endpoints for javascript.
 2. Predefined regex as well as custom regex definable in in lib/Globals.py.
 3. Regex for DOM XSS sinks, sources, web services, interesting variable already included.
 4. Shannon entropy to catch whats missed by regex.
-5. Though GIL might slow down its speed, its built with faster_than_requests, 39 times faster than original requests.
+5. Evenn though GIL might slow down its speed, its built with faster_than_requests, 39 times faster than original requests.
 
 ## Usage
 ```

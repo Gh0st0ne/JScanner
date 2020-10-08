@@ -1,39 +1,186 @@
 URL: [1m[33mhttp://localhost/example.js[0m
 
-[31mdocument.write[0m("<script>alert(1)</script>");                                                                        <--- DomXSS Sink document.write
-"http://data-flood.s3-website-us-east-1.amazonaws.com/";                                                                              <--- Entropy 
-[31ma.b.c.d.e.f.yahoo.com[0m                                                                                           <--- SubRegex (.*\.)?yahoo.com(\.)?
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var endpoint = "getcodexecution.com/a/b?cmd=ls"; // Endpoint detection 1                                                             <--- Endpoint 
+set(atoz(atob(btoa(atoi(itoa("/a/b/c")))))); // Endpoint detection 2                                                                 <--- Endpoint 
+set(ztoa(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // Endpoint detection 3                                                         <--- Endpoint 
+set(ztoz(atob(btoa(atoi(itoa("/a/b/c;d=e&f=g")))))); // Endpoint detection 4                                                         <--- Endpoint 
+set(atob("/a/b/c?d[]=e&f[]=g")); // Endpoint detection 5                                                                             <--- Endpoint 
 "810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
 URL: [1m[33mhttp://localhost/example.js[0m
 
 var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
-[31mdocument.write[0m(e); // dom sink                                                                                      <--- DomXSS Sink document.write
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
 var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
 [31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
-[31meval[0m(atoz(atob(btoa(atoi(itoa("/a/b/c")))))); // endpoint detection 2                                                         <--- DomXSS Sink eval
-[31meval[0m(ztoa(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
-[31meval[0m(ztoz(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+set(atoz(atob(btoa(atoi(itoa("/a/b/c")))))); // Endpoint detection 2                                                                 <--- Endpoint 
+set(ztoa(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // Endpoint detection 3                                                         <--- Endpoint 
+set(ztoz(atob(btoa(atoi(itoa("/a/b/c;d=e&f=g")))))); // Endpoint detection 4                                                         <--- Endpoint 
+set(atob("/a/b/c?d[]=e&f[]=g")); // Endpoint detection 5                                                                             <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
 URL: [1m[33mhttp://localhost/example.js[0m
 
 var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
-[31mdocument.write[0m(e); // dom sink                                                                                      <--- DomXSS Sink document.write
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
 var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
 [31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
-[31meval[0m(atoz(atob(btoa(atoi(itoa("/a/b/c")))))); // endpoint detection 2                                                         <--- DomXSS Sink eval
-[31meval[0m(ztoa(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
-[31meval[0m(ztoz(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
 URL: [1m[33mhttp://localhost/example.js[0m
 
 var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
-[31mdocument.write[0m(e); // dom sink                                                                                      <--- DomXSS Sink document.write
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
 var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
 [31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
-[31meval[0m(atoz(atob(btoa(atoi(itoa("/a/b/c")))))); // endpoint detection 2                                                         <--- DomXSS Sink eval
-[31meval[0m(ztoa(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
-[31meval[0m(ztoz(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
 URL: [1m[33mhttp://localhost/example.js[0m
 
 var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
-[31mdocument.write[0m(e); // dom sink                                                                                      <--- DomXSS Sink document.write
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
 var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
 [31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+var admin = "/secret_admin_dashboard"; // Endpoint detection 6                                                                       <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+"/secret_admin_dashboard"                                                                                                            <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+"/secret_admin_dashboard"                                                                                                            <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+"/secret_admin_dashboard"                                                                                                            <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+"/secret_admin_dashboard"                                                                                                            <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+"/secret_admin_dashboard"                                                                                                            <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.js[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 

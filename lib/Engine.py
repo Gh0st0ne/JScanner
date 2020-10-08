@@ -16,6 +16,7 @@ class Engine:
             jsresponse = get2str(jsurl)
         except Exception as E:
             print(E,E.__class__)
+            return []
         jstext = beautify(jsresponse).split('\n')
         return jstext
 
@@ -25,6 +26,7 @@ class Engine:
             jsresponse = get2str(jsurl)
         except Exception as E:
             print(E,E.__class__)
+            return [], []
         js_soup = BeautifulSoup(jsresponse, 'html.parser')
         script_tags = js_soup.find_all("script")
         for script_tag in script_tags:

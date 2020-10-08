@@ -1,6 +1,6 @@
 argparse
-beautifulsoup4
 bs4
-faster_than_requests
+beautifulsoup4
 jsbeautifier
 termcolor
+faster_than_requests

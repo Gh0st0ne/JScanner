@@ -3,7 +3,10 @@ from lib.ColoredObject import Color
 #url_regex = ['((http|https)\:\/\/)?([a-zA-Z0-9\.\/\?\:@\-_=#]+\.(com|net|org|co|us|ru|gov|edu|info))([a-zA-Z0-9\.\&\/\?\:@\-_=#])*']
 #path_regex = ['(\/[^\/]+){0,2}\/?']
 
+# General
 url_regex = "((http|https)\:\/\/)+[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*"
+single_path_regex = """('|"|\(|\))(\/){1}[a-zA-Z0-9-_]+(\/)?('|"|\(|\))"""
+path_regex = "([a-zA-Z0-9]+\.[a-zA-Z0-9]{3,6})?\/(([0-9a-zA-Z+.-]+)([\/&| ])){1,30}([a-zA-Z0-9]+(\.[a-zA-Z0-9]*)?)?(\?|;)?([a-zA-Z\[\]&=]*)?"
 subdomain_regex = lambda subdomain: '(.*\.)?{}(\.)?'.format(subdomain)
 
 dom_sources_regex = [
@@ -42,14 +45,17 @@ dom_sinks_regex = [
 'document.writeln',
 ]
 
-othercase_insensitive = [
+custom_insensitive = [
 'API',
 'key',
 'secretKey',
 ]
-othercase_sensitive = [
+
+# SPECIAL --->
+custom_sensitive = [
 'sourceMappingURL',
 ]
+# <---
 
 web_services_regex = [
 '([0-9a-zA-Z-.]*s3[a-zA-Z-.]*\.?amazonaws\.com\/?[a-zA-Z-.]*)',
@@ -58,7 +64,7 @@ web_services_regex = [
 '([0-9a-zA-Z-.]*?blob\.core\.windows\.net\/?[a-zA-Z-.]*)',
 ]
 
-skip_js_regex = [
+skip_regex = [
 '.*jquery.*'
 ]
 

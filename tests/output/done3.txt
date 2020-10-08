@@ -1,3 +1,0 @@
-URL: [1m[33mhttp://localhost/example.html[0m
-
-exec('uname')                                                                                                                         <--- Comments
