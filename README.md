@@ -36,7 +36,7 @@ Enjoy bug hunting
 
 ## Example
 1. Scan a single URL/Domain/Subdomain  
-* ```JScanner -d google.com```  
+* ```JScanner -d google.com``` or ```JScanner -u https://google.com/closurelibrary.js```
 2. Scan from URLs
 * ```JScanner -w /tmp/files.txt -oD `pwd` -t 10 -d domain.com```
 3. Scan from stdin (subdomains)
