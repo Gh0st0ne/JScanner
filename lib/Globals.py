@@ -3,6 +3,7 @@ from lib.ColoredObject import Color
 #url_regex = ['((http|https)\:\/\/)?([a-zA-Z0-9\.\/\?\:@\-_=#]+\.(com|net|org|co|us|ru|gov|edu|info))([a-zA-Z0-9\.\&\/\?\:@\-_=#])*']
 #path_regex = ['(\/[^\/]+){0,2}\/?']
 
+url_regex = "((http|https)\:\/\/)+[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*"
 subdomain_regex = lambda subdomain: '(.*\.)?{}(\.)?'.format(subdomain)
 
 dom_sources_regex = [
@@ -41,10 +42,13 @@ dom_sinks_regex = [
 'document.writeln',
 ]
 
-others_regex = [
+othercase_insensitive = [
 'API',
 'key',
 'secretKey',
+]
+othercase_sensitive = [
+'sourceMappingURL',
 ]
 
 web_services_regex = [

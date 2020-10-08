@@ -1,0 +1,39 @@
+URL: [1m[33mhttp://localhost/example.js[0m
+
+[31mdocument.write[0m("<script>alert(1)</script>");                                                                        <--- DomXSS Sink document.write
+"http://data-flood.s3-website-us-east-1.amazonaws.com/";                                                                              <--- Entropy 
+[31ma.b.c.d.e.f.yahoo.com[0m                                                                                           <--- SubRegex (.*\.)?yahoo.com(\.)?
+"810a5bdaafc6dd30b1d9979215935871";                                                                                                   <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                      <--- DomXSS Sink document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+[31meval[0m(atoz(atob(btoa(atoi(itoa("/a/b/c")))))); // endpoint detection 2                                                         <--- DomXSS Sink eval
+[31meval[0m(ztoa(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+[31meval[0m(ztoz(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+URL: [1m[33mhttp://localhost/example.html[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                      <--- DomXSS Sink document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+[31meval[0m(atoz(atob(btoa(atoi(itoa("/a/b/c")))))); // endpoint detection 2                                                         <--- DomXSS Sink eval
+[31meval[0m(ztoa(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+[31meval[0m(ztoz(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+URL: [1m[33mhttp://localhost/example.html[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                      <--- DomXSS Sink document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+[31meval[0m(atoz(atob(btoa(atoi(itoa("/a/b/c")))))); // endpoint detection 2                                                         <--- DomXSS Sink eval
+[31meval[0m(ztoa(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+[31meval[0m(ztoz(atob(btoa(atoi(itoa("/a/b/c?d=e&f=g")))))); // endpoint detection 3                                                 <--- DomXSS Sink eval
+URL: [1m[33mhttp://localhost/example.html[0m
+
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                      <--- DomXSS Sink document.write
+var web_service = "http://data.s3-website-us-east-1.amazonaws.com/"; // Web service                                                  <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?

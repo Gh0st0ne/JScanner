@@ -5,10 +5,11 @@ from faster_than_requests import get2str
 class Engine:
     def __init__(self):
         pass
+
     def returncomment_fromhtml(self, jsresponse):
         js_soup = BeautifulSoup(jsresponse, 'html.parser')
         comments_list = js_soup.find_all(string=lambda text: isinstance(text, Comment))
-        return comments_list
+        return set(comments_list)
 
     def returnjs_fromjs(self, jsurl):
         try:

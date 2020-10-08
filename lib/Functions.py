@@ -6,6 +6,7 @@ from lib.Globals import ColorObj
 from lib.PathFunctions import PathFunction
 
 FPathApp = PathFunction()
+
 def banner():
     from pyfiglet import print_figlet
     print_figlet('JScanner', font='larry3d', colors='BLUE')
@@ -35,6 +36,7 @@ def output_directory_writer(filepath, filename, to_write):
     output_file = open(FPathApp.slasher(argv.output_directory) + argv.domain + '.jscan', 'a')
     for jsresults in to_write:
         for jsresult in jsresults.result():
+            print(jsresult)
             output_file.write(jsresult)
     output_file.close()
 
@@ -52,8 +54,8 @@ def manage_output(line, color=None) -> tuple:
     if not color:
         return str(text + appendtext)
     elif color:
-        joinedtext = text
-        newtext = joinedtext.split(color)
+        joinedtext = text.lower()
+        newtext = joinedtext.split(color.lower())
         newtext = newtext[0] + colored(color, color='red') + newtext[1]
         return newtext + appendtext
 
