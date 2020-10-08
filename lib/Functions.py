@@ -1,5 +1,3 @@
-from sys import stdin
-from math import log
 from termcolor import colored
 
 from lib.Globals import ColorObj
@@ -13,6 +11,7 @@ def banner():
     print(colored('JScanner: Find secrets and vulnerabilites!', color='red', attrs=['bold']))
 
 def starter(argv):
+    from sys import stdin
     if argv.banner:
         banner()
         exit(0)
@@ -60,6 +59,7 @@ def manage_output(line, color=None) -> tuple:
         return newtext + appendtext
 
 def shannon_entropy(data, iterator):
+    from math import log
     if not data:
         return 0
     entropy = 0

@@ -11,6 +11,15 @@ class Engine:
         comments_list = js_soup.find_all(string=lambda text: isinstance(text, Comment))
         return set(comments_list)
 
+    def return_exlinetag_fromhtml(self, jsresponse):
+        exline_tags = []
+        js_soup = BeautifulSoup(jsresponse, 'html.parser')
+        scripts_list = js_soup.find_all('script')
+        for script_tag in scripts_list:
+            if script_tag.has_attr('src'):
+                exline_tags.append(script_tag)
+        return exline_tags
+
     def returnjs_fromjs(self, jsurl):
         try:
             jsresponse = get2str(jsurl)
@@ -34,4 +43,4 @@ class Engine:
                 jstext = beautify(script_tag.string).split('\n')
                 if jstext:
                     mega_text.extend(jstext)
-        return mega_text, self.returncomment_fromhtml(jsresponse)
+        return mega_text, [self.returncomment_fromhtml(jsresponse), self.return_exlinetag_fromhtml(jsresponse)]

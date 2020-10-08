@@ -29,13 +29,17 @@ class JSExtract:
             (lambda __after: [__after() for self.argv.domain in [(parsed_url.netloc)]][0] if parsed_url.netloc and not self.argv.domain else __after())(lambda: None)
             if search(".*\.js$", parsed_url.path):
                 jstext = JSE.returnjs_fromjs(jsurl)
-                jscomments = None
+                jscomments = None; js_exline = None;
             elif not search(".*\.js$", parsed_url.path):
-                jstext, jscomments = JSE.returnjs_fromhtml(jsurl)
+                jstext, js_other = JSE.returnjs_fromhtml(jsurl)
+                jscomments, js_exline = js_other
             if jscomments:
                 for jscomment in jscomments:
                     print(f"{ColorObj.good} Comments: {colored(jscomment.strip(' '), color='red', attrs=['bold'])}")
                     output_list.append(manage_output(f"{jscomment.strip(' ')} <--- Comments\n"))
+            if js_exline:
+                for js_script in js_exline:
+                    print(f"{ColorObj.good} Script sources: {js_script['src']}")
             for line in jstext:
                 line = line.strip(' ').rstrip('{').rstrip(' ').lstrip('}').lstrip(' ')
                 output_list.append(self.domsource_extract(line))

@@ -1,3 +1,6 @@
+# Version 2.7
+* Exline scripts parsing and printing
+
 # Version 2.6
 * Shannon entropy rebalanced
 * New functions in JSExtract with extracting as much as necessary data. eg "endpoint" or 'endpoint' will be shown as endpoint.

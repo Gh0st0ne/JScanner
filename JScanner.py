@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
 from termcolor import colored
-from urllib.parse import urlparse
-from re import search, IGNORECASE
 from traceback import format_exc
 from argparse import ArgumentParser
 from concurrent.futures import ThreadPoolExecutor
