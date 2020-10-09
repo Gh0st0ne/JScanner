@@ -1,8 +1,5 @@
 from lib.ColoredObject import Color
 
-#url_regex = ['((http|https)\:\/\/)?([a-zA-Z0-9\.\/\?\:@\-_=#]+\.(com|net|org|co|us|ru|gov|edu|info))([a-zA-Z0-9\.\&\/\?\:@\-_=#])*']
-#path_regex = ['(\/[^\/]+){0,2}\/?']
-
 # General
 url_regex = "((http|https)\:\/\/)+[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*"
 single_path_regex = """('|"|\(|\))(\/){1}[a-zA-Z0-9-_]+(\/)?('|"|\(|\))"""
@@ -64,8 +61,8 @@ web_services_regex = [
 '([0-9a-zA-Z-.]*?blob\.core\.windows\.net\/?[a-zA-Z-.]*)',
 ]
 
-skip_regex = [
-'.*jquery.*'
+library_regex = [
+'jquery'
 ]
 
 hexchar = "1234567890abcdefABCDEF"
