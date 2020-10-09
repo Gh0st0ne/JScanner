@@ -1,5 +1,10 @@
 # Version 3.0
+* Type hinted some functions
+* Repetition of same function decreased
+* Output format is changed and now sorted along with horizontal lines
 * Hidden input parameters discovery support ( You can argue using burp displays it, but it doesnt highlight it, displays same as normal)
+* Binary file is regenerated after many versions
+* Other minor changes, improvement in speed & efficieny
 
 # Version 2.9
 * Custom regex implemented in function!

@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 
 from termcolor import colored
-from traceback import format_exc
+from traceback import print_exc
 from argparse import ArgumentParser
 from concurrent.futures import ThreadPoolExecutor
 
-from lib.Functions import starter
-from lib.Functions import output_directory_writer, output_writer
 from lib.JSExtract import JSExtract
+from lib.Functions import starter, output_writer
 
 parser = ArgumentParser(description=colored('Javascript Scanner', color='yellow'), epilog=colored("Enjoy bug hunting", color='yellow'))
 input_group = parser.add_mutually_exclusive_group()
@@ -29,10 +28,14 @@ JSExtractor = JSExtract(argv)
 def main():
     with ThreadPoolExecutor(max_workers=argv.threads) as submitter:
         future_objects = [submitter.submit(JSExtractor.extract_from_url, input_word) for input_word in input_wordlist]
-    (lambda __after: (output_writer(argv.output_directory, argv.domain, future_objects), __after())[1] if argv.output_directory else __after())(lambda: (lambda __after: (output_writer(argv.output, future_objects), __after())[1] if argv.output else __after())(lambda: None))
+        try:
+            if argv.output_directory:
+                output_writer(argv.domain, future_objects, filepath=argv.output_directory)
+            elif argv.output:
+                output_writer(argv.output, future_objects, filepath=None)
+        except Exception as E:
+            print(E, E.__class__)
+            print_exc()
 
-try:
-    if __name__ == "__main__":
-        main()
-except Exception as E:
-    format_exc()
+if __name__ == "__main__":
+    main()

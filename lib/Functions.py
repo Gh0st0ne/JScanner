@@ -1,9 +1,6 @@
 from termcolor import colored
 
 from lib.Globals import ColorObj
-from lib.PathFunctions import PathFunction
-
-FPathApp = PathFunction()
 
 def banner():
     from pyfiglet import print_figlet
@@ -31,28 +28,45 @@ def starter(argv):
     else:
         return [line.rstrip('\n').strip(' ') for line in open(argv.wordlist) if line]
 
-def output_directory_writer(filepath, filename, to_write):
-    output_file = open(FPathApp.slasher(argv.output_directory) + argv.domain + '.jscan', 'a')
+def output_writer(filename, to_write, filepath=None):
+    from lib.PathFunctions import PathFunction
+    from lib.Globals import tag_dict
+    if filepath:
+        output_file = open(FPathApp.slasher(filepath) + filename + '.jscan', 'a')
+    else:
+        output_file = open(filename, 'a')
+    FPathApp = PathFunction()
     for jsresults in to_write:
-        for jsresult in jsresults.result():
-            print(jsresult)
-            output_file.write(jsresult)
-    output_file.close()
-
-def output_writer(filename, to_write):
-    output_file = open(filename, 'a')
-    for jsresults in to_write:
-        for jsresult in jsresults.result():
-            output_file.write(jsresult)
+        jarray = sorted(jsresults.result(), key=lambda x: x[1])
+        for jsresult in jarray:
+            output_file.write(jsresult[0])
+        #for tag in tag_dict.items():
+            #for jsresult in jarray:
+                #print(f"JR1: {jsresult[1]}, Tag0: {tag[0]}")
+                #if not tag[1] and tag[0] == jsresult[1]:
+                #    output_file.write(f"{tag[0]}:\t")
+                #    tag_dict[tag[0]] = True
+                #else:
+                #    print("Writing content", end=" ")
+                #    print(f"Jresult[0] {jsresult[0]}")
+                #    output_file.write(jsresult[0])
+                #else:
+                #    print(f"T0: {tag[0]},J1: {jsresult[1]}")
+            #output_file.write('\n')
     output_file.close()
 
 def manage_output(line, color=None) -> tuple:
-    text, appendtext = line.split('<---')
-    appendtext = '<---' + appendtext
-    appendtext = appendtext.rjust(148-len(text))
+    if '<-' in line:
+        text, appendtext = line.split('<---')
+        appendtext = '<---' + appendtext
+        appendtext = appendtext.rjust(148-len(text))
+        text = text + appendtext
+    else:
+        text = line
     if not color:
-        return str(text + appendtext)
+        return text
     elif color:
+        return text
         joinedtext = text.lower()
         newtext = joinedtext.split(color.lower())
         newtext = newtext[0] + colored(color, color='red') + newtext[1]
