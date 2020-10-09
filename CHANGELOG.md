@@ -1,9 +1,18 @@
+# Version 3.0
+* Hidden input parameters discovery support ( You can argue using burp displays it, but it doesnt highlight it, displays same as normal)
+
+# Version 2.9
+* Custom regex implemented in function!
+* Regex for s3 amazon was improved [a-zA-Z] -> [a-zA-Z0-9]
+
 # Version 2.8
+* Web services and endpoints differentiated
 * Compiled dynamically linked binary now available! 
+* Better parsing of inline tags
+* Other small variables changes
 
 # Version 2.7
 * Exline scripts parsing and printing
-* Other small variables changes
 
 # Version 2.6
 * Shannon entropy rebalanced

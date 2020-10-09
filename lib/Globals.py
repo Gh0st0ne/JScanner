@@ -43,9 +43,9 @@ dom_sinks_regex = [
 ]
 
 custom_insensitive = [
-'API',
-'key',
-'secretKey',
+'api',
+'secret',
+'admin',
 ]
 
 # SPECIAL --->
@@ -55,14 +55,14 @@ custom_sensitive = [
 # <---
 
 web_services_regex = [
-'([0-9a-zA-Z-.]*s3[a-zA-Z-.]*\.?amazonaws\.com\/?[a-zA-Z-.]*)',
+'([0-9a-zA-Z-.]*s3[a-zA-Z0-9-.]*\.?amazonaws\.com\/?[a-zA-Z-.]*)',
 '([0-9a-zA-Z-.]*?storage\.googleapis\.com\/?[a-zA-Z-.]*)',
 '([0-9a-zA-Z-.]*?digitaloceanspaces\.com\/?[a-zA-Z-.]*)',
 '([0-9a-zA-Z-.]*?blob\.core\.windows\.net\/?[a-zA-Z-.]*)',
 ]
 
 library_regex = [
-'jquery'
+'jQuery'
 ]
 
 hexchar = "1234567890abcdefABCDEF"

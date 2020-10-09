@@ -1,5 +1,5 @@
-from bs4 import BeautifulSoup, Comment
 from jsbeautifier import beautify
+from bs4 import BeautifulSoup, Comment
 from faster_than_requests import get2str
 
 class Engine:
@@ -10,6 +10,16 @@ class Engine:
         js_soup = BeautifulSoup(jsresponse, 'html.parser')
         comments_list = js_soup.find_all(string=lambda text: isinstance(text, Comment))
         return set(comments_list)
+
+    def returnhidden_parameter(self, jsresponse):
+        input_parameters = []
+        js_soup = BeautifulSoup(jsresponse, 'html.parser')
+        input_list = js_soup.find_all('input')
+        for input_tag in input_list:
+            if input_tag.has_attr('type') and input_tag['type'] == "hidden":
+                if input_tag.has_attr('name'):
+                    input_parameters.append(input_tag['name'])
+        return input_parameters
 
     def return_exlinetag_fromhtml(self, jsresponse):
         exline_tags = []
@@ -43,4 +53,4 @@ class Engine:
                 jstext = beautify(script_tag.string).split('\n')
                 if jstext:
                     mega_text.extend(jstext)
-        return mega_text, [self.returncomment_fromhtml(jsresponse), self.return_exlinetag_fromhtml(jsresponse)]
+        return mega_text, [self.returncomment_fromhtml(jsresponse), self.return_exlinetag_fromhtml(jsresponse), self.returnhidden_parameter(jsresponse)]

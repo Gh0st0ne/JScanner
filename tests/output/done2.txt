@@ -207,3 +207,198 @@ http://data.s3-website-us-east-1.amazonaws.com/                                 
 /secret_admin_dashboard                                                                                                              <--- Endpoint 
 http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
 810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+http://localhost/a/jquerymin.js                                                                                                      <--- Endpoint 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+[31mjquery[0mmin.js                                                                                                                    <--- Library jquery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+[31mjquery[0mmin.js                                                                                                                    <--- Library jquery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+[31mjQuery[0mmin.js                                                                                                                    <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+var jquey = "api";                                                                                                               <--- Custom regex 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+var jquey = "api";                                                                                                               <--- Custom regex 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                      <--- Endpoint 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+var jquey = "api";                                                                                                               <--- Custom regex 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                   <--- Web service 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+var jquey = "api";                                                                                                               <--- Custom regex 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                   <--- Web service 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+var jquey = "api";                                                                                                               <--- Custom regex 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+['command']                                                                                                                  <--- Hidden parameters
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                   <--- Web service 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+var jquey = "api";                                                                                                               <--- Custom regex 
+URL: [1m[33mhttp://localhost/example.html[0m
+
+Exline tags                                                                                                                           <--- Comments
+http://localhost/a/[31mjQuery[0mmin.js                                                                                                 <--- Library jQuery
+['command']                                                                                                                  <--- Hidden parameters
+var e = (window.[31mLocation.hash[0m); // dom source                                                                      <--- DomXSS Source Location.hash
+[31mdocument.write[0m(e); // dom sink                                                                                    <--- DomXSS Source document.write
+http://data.s3-website-us-east-1.amazonaws.com/                                                                                   <--- Web service 
+[31ma.b.c.d.e.f.localhost.com[0m                                                                                       <--- SubRegex (.*\.)?localhost(\.)?
+/secret_admin_dashboard                                                                                                              <--- Endpoint 
+http://data.s3wom.com/as/asdf?x=y                                                                                                    <--- Endpoint 
+810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
+var jquey = "api";                                                                                                               <--- Custom regex 

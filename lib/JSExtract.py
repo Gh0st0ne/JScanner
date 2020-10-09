@@ -8,7 +8,8 @@ from lib.PathFunctions import PathFunction
 from lib.Globals import ColorObj, base64char, hexchar
 from lib.Globals import dom_sources_regex, dom_sinks_regex
 from lib.Globals import url_regex, subdomain_regex, path_regex
-from lib.Globals import single_path_regex
+from lib.Globals import single_path_regex, library_regex
+from lib.Globals import web_services_regex, custom_sensitive, custom_insensitive
 from lib.Functions import manage_output, shannon_entropy
 
 JSE = Engine()
@@ -29,34 +30,55 @@ class JSExtract:
             (lambda __after: [__after() for self.argv.domain in [(parsed_url.netloc)]][0] if parsed_url.netloc and not self.argv.domain else __after())(lambda: None)
             if search(".*\.js$", parsed_url.path):
                 jstext = JSE.returnjs_fromjs(jsurl)
-                jscomments = None; js_exline = None;
+                jscomments = None; js_exlines = None; js_hidden = None;
             elif not search(".*\.js$", parsed_url.path):
                 jstext, js_other = JSE.returnjs_fromhtml(jsurl)
-                jscomments, js_exline = js_other
+                jscomments, js_exlines = js_other[0], js_other[1]
+                js_hidden = js_other[2]
             if jscomments:
                 for jscomment in jscomments:
                     print(f"{ColorObj.good} Comments: {colored(jscomment.strip(' '), color='red', attrs=['bold'])}")
                     output_list.append(manage_output(f"{jscomment.strip(' ')} <--- Comments\n"))
-            if js_exline:
-                for js_script in js_exline:
-                    print(f"{ColorObj.good} Script sources: {js_script['src']}")
+            if js_exlines:
+                for exline in js_exlines:
+                    output_list.append(self.exline_extract(exline['src']))
+                    if self.continuer: self.continuer = 0; continue
+            if js_hidden:
+                print(f"{ColorObj.good} Hidden input parameters: {colored(js_hidden, color='red', attrs=['bold'])}")
+                output_list.append(manage_output(f"{js_hidden} <--- Hidden parameters\n"))
             for line in jstext:
                 line = line.strip(' ').rstrip('{').rstrip(' ').lstrip('}').lstrip(' ')
                 output_list.append(self.domsource_extract(line))
                 if self.continuer: self.continuer = 0; continue
                 output_list.append(self.domsink_extract(line))
                 if self.continuer: self.continuer = 0; continue
-                output_list.append(self.url_extract(line))
+                output_list.append(self.url_extract(line)) 
                 if self.continuer: self.continuer = 0; continue
                 output_list.append(self.path_extract(line))
                 if self.continuer: self.continuer = 0; continue
                 output_list.append(self.subdomain_extract(line))
+                if self.continuer: self.continuer = 0; continue
+                output_list.append(self.custom_extract(line))
                 if self.continuer: self.continuer = 0; continue
                 output_list.append(self.shannon_extract(line))
                 if self.continuer: self.continuer = 0; continue
             return output_list
         except Exception:
             print_exc()
+
+    def exline_extract(self, line):
+        output_list = ""
+        anydigit = lambda x: any(map(str.isdigit, x))
+        lib = line.split('/')[-1]
+        for library in library_regex:
+            if search(library, line, IGNORECASE):
+                print(f"{ColorObj.good} Found {library} library: {colored(lib + ' from ' + line, color='red', attrs=['bold'])}")
+                if anydigit(line):
+                    print("Version extraction is in development")
+                output_list = manage_output(f"{line.rstrip(' ')} <--- Library {library}\n", color=library)
+                self.continuer = 1
+                return output_list
+        return ""
 
     def domsource_extract(self, line):
         output_list = ""
@@ -93,6 +115,13 @@ class JSExtract:
     
     def url_extract(self, line):
         output_list = ""
+        for web_service in web_services_regex:
+            if search(web_service, line):
+                line = search(url_regex, line).group()
+                print(f"{ColorObj.good} Found web service/storage: {colored(line.strip(' '), color='red', attrs=['bold'])}")
+                output_list = manage_output(f"{line.strip(' ')} <--- Web service \n")
+                self.continuer = 1
+                return output_list
         if search(url_regex, line):
             line = search(url_regex, line).group()
             print(f"{ColorObj.good} Found endpoint: {colored(line.strip(' '), color='red', attrs=['bold'])}")
@@ -129,7 +158,26 @@ class JSExtract:
                         return output_list
         return ""
     
+    def custom_extract(self, line):
+        output_list = ""
+        for custom in custom_sensitive:
+            if search(custom, line):
+                print(f"{ColorObj.good} Custom regex match: {colored(line, color='red', attrs=['bold'])}")
+                output_list = manage_output(f"{line} <--- Custom regex \n")
+                self.continuer = 1
+                return output_list
+        for custom in custom_insensitive:
+            if search(custom, line, IGNORECASE):
+                print(f"{ColorObj.good} Custom regex match: {colored(line, color='red', attrs=['bold'])}")
+                output_list = manage_output(f"{line} <--- Custom regex \n")
+                self.continuer = 1
+                return output_list
+        return ""
+
+    
     def reduce_string(self, line, args):
+        if not line:
+            return ""
         line = line.rstrip('//').rstrip(';')
         for arg in args:
             if arg in line and line[0] == arg and line[-1] == arg:
@@ -140,3 +188,5 @@ class JSExtract:
                     line = line[1:-1]
                     return line
         return line
+# (DONT REMOVE COMMENTS)
+# Web services combined in url_extract function 

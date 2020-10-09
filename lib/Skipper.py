@@ -1,4 +1,5 @@
 from lib.PathFunctions import PathFunction
+
 class Skip:
     def __init__(self):
         self.path_list = list()

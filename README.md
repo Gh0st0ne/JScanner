@@ -1,14 +1,13 @@
 # JScanner
 ## Description
-Who says python3 can't be fast! Download the JScanner binary and thats it! Fast and effective tool to find using custom and predefined regex for vulnerabilites and secrets. It scans concurrently and effectively on javascript files url for secrets and vulnerabilites. Scans JS even on non javascript endpoint. Output from other tools can be easily fed to it.
+A simple yet effective tool to find using custom and predefined regex for recon, vulnerabilites and secrets. It scans concurrently and effectively on all urls for secrets and vulnerabilites. Scan for regexes even on non-javascript endpoint and output from other tools can be easily fed to it. Who says python3 cant become fast, the ELF binary version of jscanner is faster than usual! 
 
 ## Features
-1. Fast :zap: when using compiled version!
-2. Concurrent scanning of all any endpoints for javascript.
-3. Predefined regex as well as custom regex definable in in lib/Globals.py.
-4. Regex for DOM XSS sinks, sources, web services, interesting variable already included.
-5. Shannon entropy to catch whats missed by regex.
-6. Evenn though GIL might slow down its speed, its built with faster_than_requests, 39 times faster than original requests.
+1. Concurrent scanning of all any endpoints for javascript using complex predefined regexes.
+2. Ability to define custom regex both case sensitive and case insensitive.
+3. Regex for DOM XSS sinks, sources, web services, hidden parameters, endpoints etc are already there
+4. GIL may slow down its speed but built with faster_than_requests, ~40x faster than requests.
+5. Shannon entropy to catches whats missed by regex.
 
 ## Usage
 ```
@@ -39,18 +38,15 @@ Enjoy bug hunting
 1. Scan a single URL/Domain/Subdomain  
 * ```JScanner -d google.com``` or ```JScanner -u https://google.com/closurelibrary.js```
 2. Scan from URLs
-* ```JScanner -w /tmp/files.txt -oD `pwd` -t 10 -d domain.com```
-3. Scan from stdin (subdomains)
-* ```assetfinder google.com | JScanner --- -o results.txt```
-4. Scan from stdin (hakrawler, gau both at same time)
+* ```JScanner -w hakrawler.txt -oD `pwd` -t 10 -d domain.com```
+3. Scan from stdin (subdomains) with entropy check
+* ```assetfinder google.com | JScanner --- -o results.txt -e```
+4. Scan from stdin (hakrawler, gau)
 * ```echo "uber.com" | tee >(hakrawler | JScanner --- -o hakrawler.txt -t 10) >(gau | JScanner --- -o gau.txt -t 10)```
 
 ## Caveats
-1. Only scans inline javascript when non js endpoint is given
-2. May provide duplicate info (URL Skipper is in progress)
-3. Output need to be improved
-4. Argument to scan .js file only
-5. Shannon Entropy to be implemented.
+1. Repeated same type of webpage may cause repetition
+2. Output needs to be managed!
 
-## Warning
-Currently under development and do contain bugs
+## Note
+Download releases rather than git clone because developmental version may contain bugs. Releases are rather stable version!
