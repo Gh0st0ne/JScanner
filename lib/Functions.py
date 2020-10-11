@@ -32,10 +32,10 @@ def output_writer(filename, to_write, filepath=None):
     from lib.PathFunctions import PathFunction
     from lib.Globals import tag_dict
     if filepath:
-        output_file = open(FPathApp.slasher(filepath) + filename + '.jscan', 'a')
+        output_file = open(path_fn.slasher(filepath) + filename + '.jscan', 'a')
     else:
         output_file = open(filename, 'a')
-    FPathApp = PathFunction()
+    path_fn = PathFunction()
     for jsresults in to_write:
         jarray = sorted(jsresults.result(), key=lambda x: x[1])
         for jsresult in jarray:
