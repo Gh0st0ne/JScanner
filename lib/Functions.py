@@ -3,9 +3,9 @@ from termcolor import colored
 from lib.Globals import ColorObj
 
 def banner():
-    from pyfiglet import print_figlet
-    print_figlet('JScanner', font='larry3d', colors='BLUE')
-    print(colored('JScanner: Find secrets and vulnerabilites!', color='red', attrs=['bold']))
+    banner = '\x1b[5m\x1b[1m\x1b[40m\x1b[31m       _______ ______                           \n      / / ___// ____/___ _____  ____  ___  _____\n __  / /\\__ \\/ /   / __ `/ __ \\/ __ \\/ _ \\/ ___/\n/ /_/ /___/ / /___/ /_/ / / / / / / /  __/ /    \n\\____//____/\\____/\\__,_/_/ /_/_/ /_/\\___/_/     \n                                                \n\x1b[0m'
+    print(banner)
+    print(colored('Ultimate endpoint scanner!', color='red', attrs=['bold']))
 
 def starter(argv):
     from sys import stdin

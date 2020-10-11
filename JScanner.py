@@ -19,7 +19,7 @@ output_group.add_argument('-oD', '--output-directory', type=str, help="Output di
 output_group.add_argument('-o', '--output', type=str, help="Output file")
 parser.add_argument('-e', '--enable-entropy', action="store_true", help="Enable entropy search")
 parser.add_argument('-t', '--threads', type=int, help="Number of threads")
-parser.add_argument('--banner', action="store_true", help="Print banner and exit")
+parser.add_argument('-b', '--banner', action="store_true", help="Print banner and exit")
 argv = parser.parse_args()
 
 input_wordlist = starter(argv)
