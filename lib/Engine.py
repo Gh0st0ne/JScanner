@@ -6,51 +6,49 @@ class Engine:
     def __init__(self):
         pass
 
-    def returncomment_fromhtml(self, jsresponse):
-        js_soup = BeautifulSoup(jsresponse, 'html.parser')
-        comments_list = js_soup.find_all(string=lambda text: isinstance(text, Comment))
-        return set(comments_list)
+    def returncomment_fromhtml(self, r):
+        s = BeautifulSoup(r, 'html.parser')
+        c = s.find_all(string=lambda text: isinstance(text, Comment))
+        return set(c)
 
-    def returnhidden_parameter(self, jsresponse):
-        input_parameters = []
-        js_soup = BeautifulSoup(jsresponse, 'html.parser')
-        input_list = js_soup.find_all('input')
-        for input_tag in input_list:
-            if input_tag.has_attr('type') and input_tag['type'] == "hidden":
-                if input_tag.has_attr('name'):
-                    input_parameters.append(input_tag['name'])
-        return input_parameters
+    def returnhidden_parameter(self, r):
+        p = []
+        s = BeautifulSoup(r, 'html.parser')
+        l = s.find_all('input')
+        for i in l:
+            if i.has_attr('type') and i['type'] == "hidden" and i.has_attr('name'):
+                p.append(i['name'])
+        return p
 
-    def return_exlinetag_fromhtml(self, jsresponse):
-        exline_tags = []
-        js_soup = BeautifulSoup(jsresponse, 'html.parser')
-        scripts_list = js_soup.find_all('script')
-        for script_tag in scripts_list:
-            if script_tag.has_attr('src'):
-                exline_tags.append(script_tag)
-        return exline_tags
+    def return_exlinetag_fromhtml(self, r):
+        e = []
+        s = BeautifulSoup(r, 'html.parser')
+        l = s.find_all('script')
+        for st in l:
+            if st.has_attr('src'):
+                e.append(st)
+        return e
 
-    def returnjs_fromjs(self, jsurl):
+    def returnjs_fromjs(self, u):
         try:
-            jsresponse = get2str(jsurl)
+            r = get2str(u)
         except Exception as E:
             print(E,E.__class__)
             return []
-        jstext = beautify(jsresponse).split('\n')
-        return jstext
+        t = beautify(r).split('\n')
+        return t
 
-    def returnjs_fromhtml(self, jsurl):
-        mega_text = []
+    def returnjs_fromhtml(self, u):
+        m = []
         try:
-            jsresponse = get2str(jsurl)
+            r = get2str(u)
         except Exception as E:
             print(E,E.__class__)
             return [], []
-        js_soup = BeautifulSoup(jsresponse, 'html.parser')
-        script_tags = js_soup.find_all("script")
-        for script_tag in script_tags:
-            if script_tag != None:
-                jstext = beautify(script_tag.string).split('\n')
-                if jstext:
-                    mega_text.extend(jstext)
-        return mega_text, [self.returncomment_fromhtml(jsresponse), self.return_exlinetag_fromhtml(jsresponse), self.returnhidden_parameter(jsresponse)]
+        s = BeautifulSoup(r, 'html.parser')
+        ss = s.find_all("script")
+        for st in ss:
+            if st != None:
+                t = beautify(st.string).split('\n')
+                if t: m.extend(t)
+        return m, [self.returncomment_fromhtml(r), self.return_exlinetag_fromhtml(r), self.returnhidden_parameter(r)]

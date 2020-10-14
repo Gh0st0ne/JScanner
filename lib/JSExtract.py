@@ -66,7 +66,7 @@ class JSExtract:
                 if self.continuer: self.continuer = 0; continue
                 output_list.append(self.shannon_extract(line))
                 if self.continuer: self.continuer = 0; continue
-            return [e for e in output_list if e]
+            return tuple(filter(lambda x: x != [], output_list)) # [e for e in output_list if e]
         except Exception:
             print_exc()
 
@@ -79,7 +79,7 @@ class JSExtract:
                 print(f"{ColorObj.good} Found {library} library: {colored(lib + ' from ' + line, color='red', attrs=['bold'])}")
                 if anydigit(line):
                     print("Version extraction is in development")
-                output_list = [manage_output(f"{line.rstrip(' ')} <--- Library {library}\n", color=library), 'Exline']
+                output_list = [manage_output(f"{line.rstrip(' ')} <--- Library\n", color=library), 'Exline']
                 self.continuer = 1
                 return output_list
         return []
@@ -89,7 +89,7 @@ class JSExtract:
         for dom_source in dom_sources_regex:
             if search(dom_source, line, IGNORECASE):
                 print(f"{ColorObj.good} Found Dom XSS Source: {colored(line.strip(' '), color='red', attrs=['bold'])}")
-                output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source {dom_source}\n", color=dom_source), 'Source']
+                output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source\n", color=dom_source), 'Source']
                 self.continuer = 1
                 return output_list
         return []
@@ -99,7 +99,7 @@ class JSExtract:
         for dom_source in dom_sinks_regex:
             if search(dom_source, line, IGNORECASE):
                 print(f"{ColorObj.good} Found Dom XSS Source: {colored(line.strip(' '), color='red', attrs=['bold'])}")
-                output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source {dom_source}\n", color=dom_source), 'Sink']
+                output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source\n", color=dom_source), 'Sink']
                 self.continuer = 1
                 return output_list
         return []
@@ -112,7 +112,7 @@ class JSExtract:
         if search(subdomain, line, IGNORECASE):
             sub = [w for w in line.split(' ') if search(subdomain, w, IGNORECASE)][0].replace(';', '').strip('"').strip("'")
             print(f"{ColorObj.good} Found subdomain: {colored(sub, color='red', attrs=['bold'])}")
-            output_list = [manage_output(f"{sub} <--- Subdomain regex {subdomain}\n", color=sub), 'Subdomain']
+            output_list = [manage_output(f"{sub} <--- Subdomain\n", color=sub), 'Subdomain']
             self.continuer = 1
             return output_list
         return []
@@ -123,13 +123,13 @@ class JSExtract:
             if search(web_service, line):
                 line = search(url_regex, line).group()
                 print(f"{ColorObj.good} Found web service/storage: {colored(line.strip(' '), color='red', attrs=['bold'])}")
-                output_list = [manage_output(f"{line.strip(' ')} <--- Web service \n"), 'Webservice']
+                output_list = [manage_output(f"{line.strip(' ')} <--- Web service\n"), 'Webservice']
                 self.continuer = 1
                 return output_list
         if search(url_regex, line):
             line = search(url_regex, line).group()
             print(f"{ColorObj.good} Found endpoint: {colored(line.strip(' '), color='red', attrs=['bold'])}")
-            output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint \n"), "Url"]
+            output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint\n"), "Url"]
             self.continuer = 1
             return output_list
         return []
@@ -139,12 +139,12 @@ class JSExtract:
         if search(path_regex, line):
             line = search(path_regex, line).group()
             print(f"{ColorObj.good} Found endpoint: {colored(line.strip(' '), color='red', attrs=['bold'])}")
-            output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint \n"), "Endpoint"]
+            output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint\n"), "Endpoint"]
             self.continuer = 1
         elif search(single_path_regex, line):
             line = self.reduce_string(search(single_path_regex, line).group(), args=['"', "'"])
             print(f"{ColorObj.good} Found endpoint: {colored(line.strip(' '), color='red', attrs=['bold'])}")
-            output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint \n"), "Endpoint"]
+            output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint\n"), "Endpoint"]
             self.continuer = 1
             return output_list
         return []

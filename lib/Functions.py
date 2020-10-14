@@ -1,6 +1,9 @@
+from math import log
 from termcolor import colored
 
 from lib.Globals import ColorObj
+from lib.PathFunctions import PathFunction
+from lib.Globals import tag_dict
 
 def banner():
     banner = '\x1b[5m\x1b[1m\x1b[40m\x1b[31m       _______ ______                           \n      / / ___// ____/___ _____  ____  ___  _____\n __  / /\\__ \\/ /   / __ `/ __ \\/ __ \\/ _ \\/ ___/\n/ /_/ /___/ / /___/ /_/ / / / / / / /  __/ /    \n\\____//____/\\____/\\__,_/_/ /_/_/ /_/\\___/_/     \n                                                \n\x1b[0m'
@@ -29,8 +32,6 @@ def starter(argv):
         return [line.rstrip('\n').strip(' ') for line in open(argv.wordlist) if line]
 
 def output_writer(filename, to_write, filepath=None):
-    from lib.PathFunctions import PathFunction
-    from lib.Globals import tag_dict
     if filepath:
         output_file = open(path_fn.slasher(filepath) + filename + '.jscan', 'a')
     else:
@@ -63,17 +64,15 @@ def manage_output(line, color=None) -> tuple:
         text = text + appendtext
     else:
         text = line
-    if not color:
-        return text
-    elif color:
-        return text
-        joinedtext = text.lower()
-        newtext = joinedtext.split(color.lower())
-        newtext = newtext[0] + colored(color, color='red') + newtext[1]
-        return newtext + appendtext
+    return text
+    # elif color: color messes with output
+        # #return text
+        # joinedtext = text.lower()
+        # newtext = joinedtext.split(color.lower())
+        # newtext = newtext[0] + colored(color, color='red') + newtext[1]
+    #     return newtext + appendtext
 
 def shannon_entropy(data, iterator):
-    from math import log
     if not data:
         return 0
     entropy = 0

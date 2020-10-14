@@ -1,3 +1,6 @@
+# Version 3.1
+* Picture added and other binary changes
+
 # Version 3.0
 * Type hinted some functions
 * Repetition of same function decreased
