@@ -27,17 +27,18 @@ class JSExtract:
         try:
             output_list = []
             jsurl = FPathApp.urler(url)
+            parsed_url = urlparse(jsurl)
             print(f"{ColorObj.information} Getting data from {colored(jsurl, color='yellow', attrs=['bold'])}")
             output_list.append((f"URL: {colored(jsurl, color='yellow', attrs=['bold'])}\n\n"))
-            parsed_url = urlparse(jsurl)
             (lambda __after: [__after() for self.argv.domain in [(parsed_url.netloc)]][0] if parsed_url.netloc and not self.argv.domain else __after())(lambda: None)
             if search(".*\.js$", parsed_url.path):
                 jstext = JSE.returnjs_fromjs(jsurl)
-                jscomments = None; js_exlines = None; js_hidden = None;
+                jscomments = None
+                js_exlines = None
+                js_hidden = None
             elif not search(".*\.js$", parsed_url.path):
                 jstext, js_other = JSE.returnjs_fromhtml(jsurl)
-                jscomments, js_exlines = js_other[0], js_other[1]
-                js_hidden = js_other[2]
+                jscomments, js_exlines, js_hidden = js_other
             if jscomments:
                 for jscomment in jscomments:
                     jscomment = '"' + jscomment +'"'
@@ -185,11 +186,9 @@ class JSExtract:
         line = line.rstrip('//').rstrip(';')
         for arg in args:
             if arg in line and line[0] == arg and line[-1] == arg:
-                line = line[1:-1]
-                return line
+                return line[1:-1]
             elif arg == "(" or arg == ")":
                 if line[0] == "(" and line[-1] == ")":
-                    line = line[1:-1]
-                    return line
+                    return line[1:-1]
         return line
 

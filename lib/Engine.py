@@ -8,8 +8,7 @@ class Engine:
 
     def returncomment_fromhtml(self, r):
         s = BeautifulSoup(r, 'html.parser')
-        c = s.find_all(string=lambda text: isinstance(text, Comment))
-        return set(c)
+        return set(s.find_all(string=lambda text: isinstance(text, Comment)))
 
     def returnhidden_parameter(self, r):
         p = []
@@ -23,20 +22,15 @@ class Engine:
     def return_exlinetag_fromhtml(self, r):
         e = []
         s = BeautifulSoup(r, 'html.parser')
-        l = s.find_all('script')
-        for st in l:
-            if st.has_attr('src'):
-                e.append(st)
+        [e.append(st) for st in s.find_all('script') if st.has_attr('src')]
         return e
 
     def returnjs_fromjs(self, u):
         try:
-            r = get2str(u)
+            return beautify(get2str(u)).split('\n')
         except Exception as E:
             print(E,E.__class__)
-            return []
-        t = beautify(r).split('\n')
-        return t
+        return []
 
     def returnjs_fromhtml(self, u):
         m = []
@@ -46,9 +40,7 @@ class Engine:
             print(E,E.__class__)
             return [], []
         s = BeautifulSoup(r, 'html.parser')
-        ss = s.find_all("script")
+        ss = filter(None, map(lambda st: beautify(st.string).split('\n'), filter(None, s.find_all("script"))))
         for st in ss:
-            if st != None:
-                t = beautify(st.string).split('\n')
-                if t: m.extend(t)
+            m.extend(st)
         return m, [self.returncomment_fromhtml(r), self.return_exlinetag_fromhtml(r), self.returnhidden_parameter(r)]

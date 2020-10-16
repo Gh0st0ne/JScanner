@@ -1,4 +1,5 @@
 # Version 3.1
+* Engine improved along with shortening of LOC and other improvements
 * Picture added with README.md improvements and other binary changes
 
 # Version 3.0
