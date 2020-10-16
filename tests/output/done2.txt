@@ -9,14 +9,3 @@ var e = (window.location.hash); // Dom Source                                   
 a.b.c.d.e.f.localhost.com                                                                                                            <--- Subdomain
 http://data.s3wom.com/as/asdf?x=y                                                                                                     <--- Endpoint
 http://data.s3-website-us-east-1.amazonaws.com/                                                                                    <--- Web service
-" Exline tags "                                                                                                                       <--- Comments
-var jquey = "api";                                                                                                               <--- Custom regex 
-/secret_admin_dashboard                                                                                                               <--- Endpoint
-810a5bdaafc6dd30b1d9979215935871                                                                                                      <--- Entropy 
-http://localhost/a/jquerymin.js                                                                                                        <--- Library
-['command']                                                                                                                  <--- Hidden parameters
-Udocument.write(e); // Dom Sink                                                                                                   <--- DomXSS Source
-var e = (window.location.hash); // Dom Source                                                                                    <--- DomXSS Source
-a.b.c.d.e.f.localhost.com                                                                                                            <--- Subdomain
-http://data.s3wom.com/as/asdf?x=y                                                                                                     <--- Endpoint
-http://data.s3-website-us-east-1.amazonaws.com/                                                                                    <--- Web service
