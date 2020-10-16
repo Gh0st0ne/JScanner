@@ -30,7 +30,7 @@ def starter(argv):
 
 def output_writer(filename, to_write, filepath=None):
     if filepath:
-        output_file = open(path_fn.slasher(filepath) + filename + '.jscan', 'a')
+        output_file = open(path_fn.ender(filepath, '/') + filename + '.jscan', 'a')
     else:
         output_file = open(filename, 'a')
     path_fn = PathFunction()
