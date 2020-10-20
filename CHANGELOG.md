@@ -1,3 +1,7 @@
+# Version 3.2
+* Slight variable naming changes
+* Improvement in engine, slight speed increased
+
 # Version 3.1
 * Engine improved along with shortening of LOC and other improvements
 * Picture added with README.md improvements and other binary changes
