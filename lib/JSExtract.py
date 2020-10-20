@@ -25,7 +25,12 @@ class JSExtract:
             parsed_url = urlparse(jsurl)
             print(f"{ColorObj.information} Getting data from {colored(jsurl, color='yellow', attrs=['bold'])}")
             output_list.append((f"URL: {colored(jsurl, color='yellow', attrs=['bold'])}\n\n"))
-            #(lambda __after: [__after() for self.argv.domain in [(parsed_url.netloc)]][0] if parsed_url.netloc and not self.argv.domain else __after())(lambda: None)
+            print(f"Before Self.argv.domain: {self.argv.domain}")
+            print(f"Before Parsed_url.netloc: {parsed_url.netloc}")
+            (lambda __after: [__after() for self.argv.domain in [(parsed_url.netloc)]][0] if parsed_url.netloc and not self.argv.domain else __after())(lambda: None)
+            print(f"After Self.argv.domain: {self.argv.domain}")
+            print(f"After Parsed_url.netloc: {parsed_url.netloc}")
+            exit()
             if parsed_url.path.endswith('.js'):
                 jstext = JSE.returnjs_fromjs(jsurl)
                 jscomments, js_exlines, js_hidden, js_links, js_imgsrc = (None, None, None, None, None)
