@@ -44,7 +44,6 @@ dom_sinks_regex = [
 ]
 
 custom_insensitive = [
-'api',
 'secret',
 'admin',
 ]

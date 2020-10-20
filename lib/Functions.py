@@ -60,14 +60,8 @@ def manage_output(line, color=None) -> tuple:
         appendtext = appendtext.rjust(148-len(text))
         text = text + appendtext
     else:
-        text = line
+        return line
     return text
-    # elif color: color messes with output
-        # #return text
-        # joinedtext = text.lower()
-        # newtext = joinedtext.split(color.lower())
-        # newtext = newtext[0] + colored(color, color='red') + newtext[1]
-    #     return newtext + appendtext
 
 def shannon_entropy(data, iterator):
     if not data:

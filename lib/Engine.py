@@ -7,7 +7,8 @@ class Engine:
         pass
 
     def returnlink_fromhtml(self, s):
-        return [t for t in s.find_all(href = True) if t]
+        l =  [t['href'] for t in s.find_all(href = True) if t]
+        return l
 
     def returnsrc_fromimg(self, s):
         l = []

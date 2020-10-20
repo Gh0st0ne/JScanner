@@ -1,3 +1,8 @@
+# Version 3.3
+* Small engine changes
+* New function link_extract to parse more links
+* Small bug fixes
+
 # Version 3.2
 * Small code refactoration
 * Better exline tags extraction with updated tests

@@ -5,15 +5,10 @@ from urllib.parse import urlparse
 
 from lib.Engine import Engine
 from lib.PathFunctions import PathFunction
-from lib.Globals import ColorObj, base64char, hexchar
-from lib.Globals import dom_sources_regex, dom_sinks_regex
-from lib.Globals import url_regex, subdomain_regex, path_regex
-from lib.Globals import single_path_regex, library_regex
+from lib.Globals import ColorObj, base64char, hexchar, dom_sources_regex, dom_sinks_regex
+from lib.Globals import url_regex, subdomain_regex, path_regex, single_path_regex, library_regex
 from lib.Globals import web_services_regex, custom_sensitive, custom_insensitive
 from lib.Functions import manage_output, shannon_entropy
-
-# (DONT REMOVE COMMENTS)
-# Web services combined in url_extract function 
 
 JSE = Engine()
 PathFunctions = PathFunction()
@@ -37,6 +32,11 @@ class JSExtract:
             elif not parsed_url.path.endswith('.js'):
                 jstext, js_other = JSE.returnjs_fromhtml(jsurl)
                 jscomments, js_exlines, js_hidden, js_links, js_imgsrc = js_other
+            if js_links or js_imgsrc:
+                for js_link in js_links:
+                    output_list.append(self.link_extract(js_link))
+                for js_src in js_imgsrc:
+                    output_list.append(self.link_extract(js_src, is_src = True))
             if jscomments:
                 for jscomment in jscomments:
                     jscomment = '"{}"'.format(jscomment.strip(' '))
@@ -64,7 +64,7 @@ class JSExtract:
                 if self.jstext_continuer: self.jstext_continuer = 0; continue
                 output_list.append(self.shannon_extract(line))
                 if self.jstext_continuer: self.jstext_continuer = 0; continue
-            return tuple(filter(lambda e: e != [], output_list))
+            return tuple(filter(None, output_list))
         except Exception:
             print_exc()
 
@@ -77,7 +77,7 @@ class JSExtract:
             if search(library, line, IGNORECASE):
                 print(f"{ColorObj.good} Found {library}: {colored(line, color='red', attrs=['bold'])}")
             else:
-                print(f"{ColorObj.good} External link: {colored(line, color='red', attrs=['bold'])}")
+                print(f"{ColorObj.good} External script tags: {colored(line, color='red', attrs=['bold'])}")
             output_list = [manage_output(f"{line.rstrip(' ')} <--- External\n"), 'Exline']
             return output_list
         return []
@@ -108,7 +108,7 @@ class JSExtract:
             return output_list
         subdomain = subdomain_regex(self.argv.domain)
         if search(subdomain, line, IGNORECASE):
-            sub = [w for w in line.split(' ') if search(subdomain, w, IGNORECASE)][0].replace(';', '').strip('"').strip("'")
+            sub = search(subdomain, line, IGNORECASE).group()
             print(f"{ColorObj.good} Found subdomain: {colored(sub, color='red', attrs=['bold'])}")
             output_list = [manage_output(f"{sub} <--- Subdomain\n", color=sub), 'Subdomain']
             self.jstext_continuer = 1
@@ -131,7 +131,33 @@ class JSExtract:
             self.jstext_continuer = 1
             return output_list
         return []
-    
+
+    def link_extract(self, line: str, is_src = False) -> list:
+        output_list = []
+        for web_service in web_services_regex:
+            if search(web_service, line):
+                line = search(url_regex, line).group()
+                print(f"{ColorObj.good} Found web service/storage: {colored(line.strip(' '), color='red', attrs=['bold'])}")
+                output_list = [manage_output(f"{line.strip(' ')} <--- Web service\n"), 'Webservice']
+                return output_list
+        if not line or line.startswith('#'):
+            return output_list
+        elif search(url_regex, line) and not is_src:
+            line = search(url_regex, line).group()
+        elif search(path_regex, line) and not is_src:
+            line = search(path_regex, line).group()
+        elif search(single_path_regex, line) and not is_src:
+            line = search(single_path_regex, line).group()
+        else:
+            return output_list
+        if line:
+            if not is_src:
+                print(f"{ColorObj.good} Found external links/hrefs: {colored(line.strip(' '), color='red', attrs=['bold'])}")
+            else:
+                print(f"{ColorObj.good} Found image source: {colored(line.strip(' '), color='red', attrs=['bold'])}")
+            output_list = [manage_output(f"{line.strip(' ')} <--- External hrefs\n"), "Link"]
+        return output_list
+
     def path_extract(self, line: str) -> list:
         output_list = []
         if search(path_regex, line):
@@ -175,7 +201,6 @@ class JSExtract:
                 self.jstext_continuer = 1
                 return output_list
         return []
-
     
     def reduce_string(self, line: str, args: list) -> str:
         if not line:
