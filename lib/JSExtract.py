@@ -31,14 +31,12 @@ class JSExtract:
             print(f"{ColorObj.information} Getting data from {colored(jsurl, color='yellow', attrs=['bold'])}")
             output_list.append((f"URL: {colored(jsurl, color='yellow', attrs=['bold'])}\n\n"))
             (lambda __after: [__after() for self.argv.domain in [(parsed_url.netloc)]][0] if parsed_url.netloc and not self.argv.domain else __after())(lambda: None)
-            if search(".*\.js$", parsed_url.path):
+            if parsed_url.path.endswith('.js'):
                 jstext = JSE.returnjs_fromjs(jsurl)
-                jscomments = None
-                js_exlines = None
-                js_hidden = None
-            elif not search(".*\.js$", parsed_url.path):
+                jscomments, js_exlines, js_hidden, js_links, js_imgsrc = (None, None, None, None, None)
+            elif not parsed_url.path.endswith('.js'):
                 jstext, js_other = JSE.returnjs_fromhtml(jsurl)
-                jscomments, js_exlines, js_hidden = js_other
+                jscomments, js_exlines, js_hidden, js_links, js_imgsrc = js_other
             if jscomments:
                 for jscomment in jscomments:
                     jscomment = '"' + jscomment +'"'
@@ -47,7 +45,6 @@ class JSExtract:
             if js_exlines:
                 for exline in js_exlines:
                     output_list.append(self.exline_extract(exline['src']))
-                    if self.continuer: self.continuer = 0; continue
             if js_hidden:
                 print(f"{ColorObj.good} Hidden input parameters: {colored(js_hidden, color='red', attrs=['bold'])}")
                 output_list.append([manage_output(f"{js_hidden} <--- Hidden parameters\n"), 'Hidden'])
@@ -73,16 +70,16 @@ class JSExtract:
 
     def exline_extract(self, line: str) -> list:
         output_list = []
-        anydigit = lambda x: any(map(str.isdigit, x))
+        #anydigit = lambda x: any(map(str.isdigit, x)) # to be developed later and also, self.continuer is intentionally removed
+        #if self.continuer: self.continuer = 0; continue, and self.continuer = 1 in this function
         lib = line.split('/')[-1]
         for library in library_regex:
             if search(library, line, IGNORECASE):
-                print(f"{ColorObj.good} Found {library} library: {colored(lib + ' from ' + line, color='red', attrs=['bold'])}")
-                if anydigit(line):
-                    print("Version extraction is in development")
-                output_list = [manage_output(f"{line.rstrip(' ')} <--- Library\n", color=library), 'Exline']
-                self.continuer = 1
-                return output_list
+                print(f"{ColorObj.good} Found {library}: {colored(line, color='red', attrs=['bold'])}")
+            else:
+                print(f"{ColorObj.good} External link: {colored(line, color='red', attrs=['bold'])}")
+            output_list = [manage_output(f"{line.rstrip(' ')} <--- External\n"), 'Exline']
+            return output_list
         return []
 
     def domsource_extract(self, line: str) -> list:

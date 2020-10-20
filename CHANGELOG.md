@@ -1,4 +1,5 @@
 # Version 3.2
+* Better exline tags extraction with updated tests
 * Slight variable naming changes
 * Improvement in engine, slight speed increased
 

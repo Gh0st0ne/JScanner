@@ -6,10 +6,19 @@ class Engine:
     def __init__(self):
         pass
 
+    def returnlink_fromhtml(self, s):
+        return [t for t in s.find_all(href = True) if t]
+
+    def returnsrc_fromimg(self, s):
+        l = []
+        for i in s.find_all('img'):
+            if i.has_attr('src'): l.append(i['src'])
+        return set(l)
+
     def returncomment_fromcomment(self, s):
         return set(s.find_all(string=lambda text: isinstance(text, Comment)))
 
-    def returhiddden_frominput(self, s):
+    def returnhiddden_frominput(self, s):
         p = []
         l = s.find_all('input')
         for i in l:
@@ -37,7 +46,7 @@ class Engine:
             print(E,E.__class__)
             return [], []
         s = BeautifulSoup(r, 'html.parser')
-        ss = filter(None, map(lambda st: beautify(st.string).split('\n'), filter(None, s.find_all("script"))))
-        for st in ss:
+        stext = filter(None, map(lambda st: beautify(st.string).split('\n'), filter(None, s.find_all("script"))))
+        for st in stext:
             m.extend(st)
-        return m, [self.returncomment_fromcomment(s), self.returnexline_fromscript(s), self.returhiddden_frominput(s)]
+        return m, [self.returncomment_fromcomment(s), self.returnexline_fromscript(s), self.returnhiddden_frominput(s), self.returnlink_fromhtml(s), self.returnsrc_fromimg(s)]
