@@ -2,7 +2,8 @@ from lib.PathFunctions import PathFunction
 
 class Skip:
     def __init__(self):
-        self.exist = False 
+        ''' Skips unwanted urls '''
+        self.exist = False
         self.path_list = []
         self.netloc_list = []
         self.parameter_list = {}
@@ -19,11 +20,11 @@ class Skip:
     def add_parameter(self, url: str, parameter_list: list) -> list:
         url = self.path_fn.ender(url, '?')
         if url in self.parameter_list:
-             var = self.parameter_list[url]
-             var.update(set(parameter_list))
-             self.parameter_list[url] = var
+            var = self.parameter_list[url]
+            var.update(set(parameter_list))
+            self.parameter_list[url] = var
         else:
-             self.parameter_list[url] = set(parameter_list)
+            self.parameter_list[url] = set(parameter_list)
         return self.parameter_list[url] 
     
     def add_unique_parameter(self, parameter_list: list) -> bool:
