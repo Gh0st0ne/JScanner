@@ -1,4 +1,5 @@
 class PathFunction:
+    ''' Functions useful for dealing with URLs '''
     def merge(self, xpath: str, ypath: str) -> str:
         ''' Merges two parts of url '''
         if not xpath or not ypath:
