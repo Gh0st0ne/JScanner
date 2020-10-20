@@ -16,17 +16,17 @@ from lib.Functions import manage_output, shannon_entropy
 # Web services combined in url_extract function 
 
 JSE = Engine()
-FPathApp = PathFunction()
+PathFunctions = PathFunction()
 
 class JSExtract:
     def __init__(self, argv):
-        self.continuer = 0
+        self.jstext_continuer = 0
         self.argv = argv
 
     def extract_from_url(self, url: str) -> bool:
         try:
             output_list = []
-            jsurl = FPathApp.urler(url)
+            jsurl = PathFunctions.urler(url)
             parsed_url = urlparse(jsurl)
             print(f"{ColorObj.information} Getting data from {colored(jsurl, color='yellow', attrs=['bold'])}")
             output_list.append((f"URL: {colored(jsurl, color='yellow', attrs=['bold'])}\n\n"))
@@ -39,9 +39,9 @@ class JSExtract:
                 jscomments, js_exlines, js_hidden, js_links, js_imgsrc = js_other
             if jscomments:
                 for jscomment in jscomments:
-                    jscomment = '"' + jscomment +'"'
-                    print(f"{ColorObj.good} Comments: {colored(jscomment.strip(' '), color='red', attrs=['bold'])}")
-                    output_list.append([manage_output(f"{jscomment.strip(' ')} <--- Comments\n"), 'Comments'])
+                    jscomment = '"{}"'.format(jscomment.strip(' '))
+                    print(f"{ColorObj.good} Comments: {colored(jscomment, color='red', attrs=['bold'])}")
+                    output_list.append([manage_output(f"{jscomment} <--- Comments\n"), 'Comments'])
             if js_exlines:
                 for exline in js_exlines:
                     output_list.append(self.exline_extract(exline['src']))
@@ -51,27 +51,27 @@ class JSExtract:
             for line in jstext:
                 line = line.strip(' ').rstrip('{').rstrip(' ').lstrip('}').lstrip(' ')
                 output_list.append(self.domsource_extract(line))
-                if self.continuer: self.continuer = 0; continue
+                if self.jstext_continuer: self.jstext_continuer = 0; continue
                 output_list.append(self.domsink_extract(line))
-                if self.continuer: self.continuer = 0; continue
+                if self.jstext_continuer: self.jstext_continuer = 0; continue
                 output_list.append(self.url_extract(line)) 
-                if self.continuer: self.continuer = 0; continue
+                if self.jstext_continuer: self.jstext_continuer = 0; continue
                 output_list.append(self.path_extract(line))
-                if self.continuer: self.continuer = 0; continue
+                if self.jstext_continuer: self.jstext_continuer = 0; continue
                 output_list.append(self.subdomain_extract(line))
-                if self.continuer: self.continuer = 0; continue
+                if self.jstext_continuer: self.jstext_continuer = 0; continue
                 output_list.append(self.custom_extract(line))
-                if self.continuer: self.continuer = 0; continue
+                if self.jstext_continuer: self.jstext_continuer = 0; continue
                 output_list.append(self.shannon_extract(line))
-                if self.continuer: self.continuer = 0; continue
-            return tuple(filter(lambda x: x != [], output_list)) # [e for e in output_list if e]
+                if self.jstext_continuer: self.jstext_continuer = 0; continue
+            return tuple(filter(lambda e: e != [], output_list))
         except Exception:
             print_exc()
 
     def exline_extract(self, line: str) -> list:
         output_list = []
-        #anydigit = lambda x: any(map(str.isdigit, x)) # to be developed later and also, self.continuer is intentionally removed
-        #if self.continuer: self.continuer = 0; continue, and self.continuer = 1 in this function
+        #anydigit = lambda x: any(map(str.isdigit, x)) # to be developed later and also, self.jstext_continuer is intentionally removed
+        #if self.jstext_continuer: self.jstext_continuer = 0; continue, and self.jstext_continuer = 1 in this function
         lib = line.split('/')[-1]
         for library in library_regex:
             if search(library, line, IGNORECASE):
@@ -88,7 +88,7 @@ class JSExtract:
             if search(dom_source, line, IGNORECASE):
                 print(f"{ColorObj.good} Found Dom XSS Source: {colored(line.strip(' '), color='red', attrs=['bold'])}")
                 output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source\n", color=dom_source), 'Source']
-                self.continuer = 1
+                self.jstext_continuer = 1
                 return output_list
         return []
 
@@ -98,7 +98,7 @@ class JSExtract:
             if search(dom_source, line, IGNORECASE):
                 print(f"{ColorObj.good} Found Dom XSS Source: {colored(line.strip(' '), color='red', attrs=['bold'])}")
                 output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source\n", color=dom_source), 'Sink']
-                self.continuer = 1
+                self.jstext_continuer = 1
                 return output_list
         return []
 
@@ -111,7 +111,7 @@ class JSExtract:
             sub = [w for w in line.split(' ') if search(subdomain, w, IGNORECASE)][0].replace(';', '').strip('"').strip("'")
             print(f"{ColorObj.good} Found subdomain: {colored(sub, color='red', attrs=['bold'])}")
             output_list = [manage_output(f"{sub} <--- Subdomain\n", color=sub), 'Subdomain']
-            self.continuer = 1
+            self.jstext_continuer = 1
             return output_list
         return []
     
@@ -122,13 +122,13 @@ class JSExtract:
                 line = search(url_regex, line).group()
                 print(f"{ColorObj.good} Found web service/storage: {colored(line.strip(' '), color='red', attrs=['bold'])}")
                 output_list = [manage_output(f"{line.strip(' ')} <--- Web service\n"), 'Webservice']
-                self.continuer = 1
+                self.jstext_continuer = 1
                 return output_list
         if search(url_regex, line):
             line = search(url_regex, line).group()
             print(f"{ColorObj.good} Found endpoint: {colored(line.strip(' '), color='red', attrs=['bold'])}")
             output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint\n"), "Url"]
-            self.continuer = 1
+            self.jstext_continuer = 1
             return output_list
         return []
     
@@ -138,12 +138,12 @@ class JSExtract:
             line = search(path_regex, line).group()
             print(f"{ColorObj.good} Found endpoint: {colored(line.strip(' '), color='red', attrs=['bold'])}")
             output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint\n"), "Endpoint"]
-            self.continuer = 1
+            self.jstext_continuer = 1
         elif search(single_path_regex, line):
             line = self.reduce_string(search(single_path_regex, line).group(), args=['"', "'"])
             print(f"{ColorObj.good} Found endpoint: {colored(line.strip(' '), color='red', attrs=['bold'])}")
             output_list = [manage_output(f"{line.strip(' ')} <--- Endpoint\n"), "Endpoint"]
-            self.continuer = 1
+            self.jstext_continuer = 1
             return output_list
         return []
 
@@ -156,7 +156,7 @@ class JSExtract:
                         word = self.reduce_string(word.rstrip(';'), args=['"', "'"])
                         print(f"{ColorObj.good} Suspicious data: {colored(word, color='red', attrs=['bold'])}")
                         output_list = [manage_output(f"{word} <--- Entropy \n"), "Entropy"]
-                        self.continuer = 1
+                        self.jstext_continuer = 1
                         return output_list
         return []
     
@@ -166,13 +166,13 @@ class JSExtract:
             if search(custom, line):
                 print(f"{ColorObj.good} Custom regex match: {colored(line, color='red', attrs=['bold'])}")
                 output_list = [manage_output(f"{line} <--- Custom regex \n"), "Custom"]
-                self.continuer = 1
+                self.jstext_continuer = 1
                 return output_list
         for custom in custom_insensitive:
             if search(custom, line, IGNORECASE):
                 print(f"{ColorObj.good} Custom regex match: {colored(line, color='red', attrs=['bold'])}")
                 output_list = [manage_output(f"{line} <--- Custom regex \n"), "Custom"]
-                self.continuer = 1
+                self.jstext_continuer = 1
                 return output_list
         return []
 
