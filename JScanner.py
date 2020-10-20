@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-from termcolor import colored
 from traceback import print_exc
+from termcolor import colored
 from argparse import ArgumentParser
 from concurrent.futures import ThreadPoolExecutor
 
@@ -28,14 +28,10 @@ JSExtractor = JSExtract(argv)
 def main():
     with ThreadPoolExecutor(max_workers=argv.threads) as submitter:
         future_objects = [submitter.submit(JSExtractor.extract_from_url, input_word) for input_word in input_wordlist]
-        try:
-            if argv.output_directory:
-                output_writer(argv.domain, future_objects, filepath=argv.output_directory)
-            elif argv.output:
-                output_writer(argv.output, future_objects, filepath=None)
-        except Exception as E:
-            print(E, E.__class__)
-            print_exc()
+        if argv.output_directory:
+            output_writer(argv.domain, future_objects, filepath=argv.output_directory)
+        elif argv.output:
+            output_writer(argv.output, future_objects, filepath=None)
 
 if __name__ == "__main__":
     main()
