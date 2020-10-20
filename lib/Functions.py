@@ -1,18 +1,19 @@
 from math import log
 from termcolor import colored
 
-from lib.Globals import ColorObj, tag_dict
+from lib.Globals import ColorObj
 from lib.PathFunctions import PathFunction
 
 def banner():
-    banner = '\x1b[5m\x1b[1m\x1b[40m\x1b[31m       _______ ______                           \n      / / ___// ____/___ _____  ____  ___  _____\n __  / /\\__ \\/ /   / __ `/ __ \\/ __ \\/ _ \\/ ___/\n/ /_/ /___/ / /___/ /_/ / / / / / / /  __/ /    \n\\____//____/\\____/\\__,_/_/ /_/_/ /_/\\___/_/     \n                                                \n\x1b[0m'
-    print(banner)
+    b = '\x1b[5m\x1b[1m\x1b[40m\x1b[31m       _______ ______                           \n      / / ___// ____/___ _____  ____  ___  _____\n __  / /\\__ \\/ /   / __ `/ __ \\/ __ \\/ _ \\/ ___/\n/ /_/ /___/ / /___/ /_/ / / / / / / /  __/ /    \n\\____//____/\\____/\\__,_/_/ /_/_/ /_/\\___/_/     \n                                                \n\x1b[0m'
+    print(b)
     print(colored('Ultimate endpoint scanner!', color='red', attrs=['bold']))
-    exit()
 
 def starter(argv):
     from sys import stdin
-    if argv.banner: banner()
+    if argv.banner:
+        banner()
+        exit()
     if argv.output_directory:
         if not argv.domain:
             print(f"{ColorObj.bad} Output directory provided but not domain")

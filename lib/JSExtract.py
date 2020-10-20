@@ -36,7 +36,7 @@ class JSExtract:
                 for js_link in js_links:
                     output_list.append(self.link_extract(js_link))
                 for js_src in js_imgsrc:
-                    output_list.append(self.link_extract(js_src, is_src = True))
+                    output_list.append(self.link_extract(js_src, is_src=True))
             if jscomments:
                 for jscomment in jscomments:
                     jscomment = '"{}"'.format(jscomment.strip(' '))
@@ -72,7 +72,6 @@ class JSExtract:
         output_list = []
         #anydigit = lambda x: any(map(str.isdigit, x)) # to be developed later and also, self.jstext_continuer is intentionally removed
         #if self.jstext_continuer: self.jstext_continuer = 0; continue, and self.jstext_continuer = 1 in this function
-        lib = line.split('/')[-1]
         for library in library_regex:
             if search(library, line, IGNORECASE):
                 print(f"{ColorObj.good} Found {library}: {colored(line, color='red', attrs=['bold'])}")
