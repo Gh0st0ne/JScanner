@@ -43,7 +43,7 @@ class Engine:
         try:
             r = get2str(u)
         except Exception as E:
-            print(E,E.__class__)
+            print(E, E.__class__)
             return [], []
         s = BeautifulSoup(r, 'html.parser')
         stext = filter(None, map(lambda st: beautify(st.string).split('\n'), filter(None, s.find_all("script"))))
