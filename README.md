@@ -1,6 +1,7 @@
 # JScanner
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![CRLFI](lib/JSCANNER.png)
-<p align="center">[![Code Grade](https://www.code-inspector.com/project/15087/status/svg)](https://frontend.code-inspector.com/public/project/15087/JScanner/dashboard)
+<p align="center">
+[![Code Grade](https://www.code-inspector.com/project/15087/status/svg)](https://frontend.code-inspector.com/public/project/15087/JScanner/dashboard)
 [![Code Quality](https://www.code-inspector.com/project/15087/score/svg)](https://frontend.code-inspector.com/public/project/15087/JScanner/dashboard)
 </p>
 
