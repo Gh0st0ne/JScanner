@@ -86,7 +86,7 @@ class JSExtract:
         for dom_source in dom_sources_regex:
             if search(dom_source, line, IGNORECASE):
                 print(f"{ColorObj.good} Found Dom XSS Source: {colored(line.strip(' '), color='red', attrs=['bold'])}")
-                output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source\n", color=dom_source), 'Source']
+                output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source\n"), 'Source']
                 self.jstext_continuer = 1
                 return output_list
         return []
@@ -96,7 +96,7 @@ class JSExtract:
         for dom_source in dom_sinks_regex:
             if search(dom_source, line, IGNORECASE):
                 print(f"{ColorObj.good} Found Dom XSS Source: {colored(line.strip(' '), color='red', attrs=['bold'])}")
-                output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source\n", color=dom_source), 'Sink']
+                output_list = [manage_output(f"{line.strip(' ')} <--- DomXSS Source\n"), 'Sink']
                 self.jstext_continuer = 1
                 return output_list
         return []
@@ -109,7 +109,7 @@ class JSExtract:
         if search(subdomain, line, IGNORECASE):
             sub = search(subdomain, line, IGNORECASE).group()
             print(f"{ColorObj.good} Found subdomain: {colored(sub, color='red', attrs=['bold'])}")
-            output_list = [manage_output(f"{sub} <--- Subdomain\n", color=sub), 'Subdomain']
+            output_list = [manage_output(f"{sub} <--- Subdomain\n"), 'Subdomain']
             self.jstext_continuer = 1
             return output_list
         return []

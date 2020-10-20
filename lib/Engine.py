@@ -28,8 +28,7 @@ class Engine:
         return p
 
     def returnexline_fromscript(self, s):
-        e = []
-        [e.append(st) for st in s.find_all('script') if st.has_attr('src')]
+        e = [st for st in s.find_all('script') if st.has_attr('src')]
         return e
 
     def returnjs_fromjs(self, u):

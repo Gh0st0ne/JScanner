@@ -30,11 +30,11 @@ def starter(argv):
         return [line.rstrip('\n').strip(' ') for line in open(argv.wordlist) if line]
 
 def output_writer(filename, to_write, filepath=None):
+    PathFunctions = PathFunction()
     if filepath:
-        output_file = open(path_fn.ender(filepath, '/') + filename + '.jscan', 'a')
+        output_file = open(PathFunctions.ender(filepath, '/') + filename + '.jscan', 'a')
     else:
         output_file = open(filename, 'a')
-    path_fn = PathFunction()
     for jsresults in to_write:
         jarray = sorted(jsresults.result(), key=lambda x: x[1])
         for jsresult in jarray:
@@ -54,7 +54,7 @@ def output_writer(filename, to_write, filepath=None):
             #output_file.write('\n')
     output_file.close()
 
-def manage_output(line, color=None) -> tuple:
+def manage_output(line) -> tuple:
     if '<-' in line:
         text, appendtext = line.split('<---')
         appendtext = '<---' + appendtext
