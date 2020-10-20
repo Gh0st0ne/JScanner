@@ -4,7 +4,7 @@ class PathFunction:
         ''' Merges two parts of url '''
         if not xpath or not ypath:
             return ""
-        xpath = self.urlerslasher(xpath) 
+        xpath = self.urlerslasher(xpath)
         ypath = self.unstarter(ypath, '/')
         return xpath + ypath
   
