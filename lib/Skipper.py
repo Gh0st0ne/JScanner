@@ -25,7 +25,7 @@ class Skip:
             self.parameter_list[url] = var
         else:
             self.parameter_list[url] = set(parameter_list)
-        return self.parameter_list[url] 
+        return self.parameter_list[url]
     
     def add_unique_parameter(self, parameter_list: list) -> bool:
         for parameter in parameter_list:
@@ -56,11 +56,7 @@ class Skip:
 
     def check_parameter(self, url: str, parameter: str):
         url = self.path_fn.ender(url, '?')
-        try:
-            if self.parameter_list[url]:
-                self.exist = True
-        except:
-            self.exist = False
+        self.exist = bool(self.parameter_list.get(url))
         if self.exist:
             parameters_list = self.parameter_list[url]
             for param in parameters_list:

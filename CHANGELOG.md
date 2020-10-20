@@ -1,5 +1,5 @@
 # Version 3.3
-* Small engine changes
+* Small engine changes as well as skipper changes
 * New function link_extract to parse more links
 * Small bug fixes
 
