@@ -8,8 +8,8 @@ A simple yet effective tool to find using custom and predefined regex for recon,
 1. Concurrent scanning of all any endpoints for javascript using complex predefined regexes.
 2. Ability to define custom regex both case sensitive and case insensitive.
 3. Regex for DOM XSS sinks, sources, web services, hidden parameters, endpoints etc are already there
-4. GIL may slow down its speed but built with faster_than_requests, ~40x faster than requests.
-5. Shannon entropy to catches whats missed by regex.
+4. Its built with faster_than_requests, ~40x faster than requests.
+5. Shannon entropy to catches whats missed by regex (may cause lengthy output and thus disabled by default)
 
 ## Usage
 ```
@@ -47,8 +47,9 @@ Enjoy bug hunting
 * ```echo "uber.com" | tee >(hakrawler | JScanner --- -o hakrawler.txt -t 10) >(gau | JScanner --- -o gau.txt -t 10)```
 
 ## Caveats
-1. Repeated same type of webpage may cause repetition
-2. Output needs to be managed!
+1. Repeated same type of webpage may cause repetition of data
+2. Even same page may caused repetition of data which sort -u fixes, however it is going to be fixed in further version
+3. Output from program as well as file output should be improved
 
 ## Note
 Download releases rather than git clone because developmental version may contain bugs. Releases are rather stable version!
