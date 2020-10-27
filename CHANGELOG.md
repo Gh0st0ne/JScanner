@@ -1,3 +1,6 @@
+# Version 3.4
+* Generator instead of list for improved memory
+
 # Version 3.3
 * Skipper changes with lot of improvement
 * Small engine changes as well as skipper changes

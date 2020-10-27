@@ -141,11 +141,11 @@ class JSExtract:
                 return output_list
         if not line or line.startswith('#'):
             return output_list
-        elif search(url_regex, line) and not is_src:
+        elif search(url_regex, line):
             line = search(url_regex, line).group()
-        elif search(path_regex, line) and not is_src:
+        elif search(path_regex, line):
             line = search(path_regex, line).group()
-        elif search(single_path_regex, line) and not is_src:
+        elif search(single_path_regex, line):
             line = search(single_path_regex, line).group()
         else:
             return output_list

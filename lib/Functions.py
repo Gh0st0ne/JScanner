@@ -23,11 +23,11 @@ def starter(argv):
                 print(f"{ColorObj.bad} Use --help")
                 exit()
             else:
-                return [line.rstrip('\n').strip(' ') for line in stdin.read().split('\n') if line]
+                return (line.rstrip('\n').strip(' ') for line in stdin.read().split('\n') if line)
         else:
             return [argv.url.strip(' ')]
     else:
-        return [line.rstrip('\n').strip(' ') for line in open(argv.wordlist) if line]
+        return (line.rstrip('\n').strip(' ') for line in open(argv.wordlist) if line)
 
 def output_writer(filename, to_write, filepath=None):
     PathFunctions = PathFunction()
