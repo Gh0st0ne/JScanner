@@ -1,5 +1,4 @@
 class PathFunction:
-    ''' Functions useful for dealing with URLs '''
     def merge(self, xpath: str, ypath: str) -> str:
         if not xpath or not ypath:
             return ""
@@ -10,32 +9,28 @@ class PathFunction:
     def urlerslasher(self, xpath: str) -> str:
         if not xpath:
             return xpath
-        ypath = self.ender(self.urler(xpath), '/')
-        return ypath
+        return self.ender(self.urler(xpath), '/')
     
     def starter(self, xpath:str, ypath: str) -> str:
         if not xpath or not ypath:
             return ""
         if xpath[0] != ypath:
             return ypath + xpath
-        else:
-            return xpath
+        return xpath
 
     def unstarter(self, xpath:str, ypath: str) -> str:
         if not xpath or not ypath:
             return ""
         if xpath[0] == ypath:
             return xpath[1:]
-        else:
-            return xpath
+        return xpath
 
     def ender(self, xpath: str, ypath: str) -> str:
         if not xpath or not ypath:
             return ""
         if xpath[-1] != ypath:
             return xpath + ypath
-        else:
-            return xpath
+        return xpath
 
     def unender(self, xpath: str, ypath: str) -> str:
         if not xpath or not ypath:
@@ -48,16 +43,12 @@ class PathFunction:
         if not xpath:
             return xpath
         if not xpath.startswith('http://') and not xpath.startswith('https://'):
-            ypath = "http://" + xpath
-        else:
-            ypath = xpath
-        return ypath
+            return "http://" + xpath
+        return xpath
 
     def unurler(self, xpath: str) -> str:
         if not xpath:
             return xpath
-        if not '://' in xpath:
-            ypath = xpath
-        else:
-            ypath = xpath.split('://')[-1]
-        return ypath
+        if '://' in xpath:
+            return xpath.split('://')[-1]
+        return xpath
