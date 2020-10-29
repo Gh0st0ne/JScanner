@@ -1,6 +1,5 @@
 from lib.ColoredObject import Color
-## DONT DELETE COMMENT
-## Dont change tag_dict
+
 # General
 url_regex = "((http|https)\:\/\/)+[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*"
 single_path_regex = """('|"|\(|\))(\/){1}[a-zA-Z0-9-_]+(\/)?('|"|\(|\))"""
@@ -67,8 +66,9 @@ library_regex = [
 
 hexchar = "1234567890abcdefABCDEF"
 base64char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
-ColorObj = Color()
+Color = Color()
 
+# FOR OUTPUT PURPOSE
 tag_dict = {
     "Comments": False,
     "Custom": False,

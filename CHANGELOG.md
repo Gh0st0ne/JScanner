@@ -1,9 +1,15 @@
+# Version 3.5
+* Small code refactoration
+* Advanced parsing of URLs and Subdomain for reduced unimportant URLs and subdomains
+
 # Version 3.4
 * Generator instead of list for improved memory
+* Huge changes in PathFunction and Skipper
+* Improved variable naming convention
+* Lots of performances improvement
 
 # Version 3.3
-* Skipper changes with lot of improvement
-* Small engine changes as well as skipper changes
+* Small engine changes
 * New function link_extract to parse more links
 * Small bug fixes
 

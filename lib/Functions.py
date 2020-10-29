@@ -1,8 +1,8 @@
 from math import log
 from termcolor import colored
 
-from lib.Globals import ColorObj
-from lib.PathFunctions import PathFunction
+from lib.Globals import Color
+from lib.PathFunctions import ender
 
 def banner():
     b = '\x1b[5m\x1b[1m\x1b[40m\x1b[31m       _______ ______                           \n      / / ___// ____/___ _____  ____  ___  _____\n __  / /\\__ \\/ /   / __ `/ __ \\/ __ \\/ _ \\/ ___/\n/ /_/ /___/ / /___/ /_/ / / / / / / /  __/ /    \n\\____//____/\\____/\\__,_/_/ /_/_/ /_/\\___/_/     \n                                                \n\x1b[0m'
@@ -16,11 +16,11 @@ def starter(argv):
         exit()
     if argv.output_directory:
         if not argv.domain:
-            print(f"{ColorObj.bad} Output directory provided but not domain")
+            print(f"{Color.bad} Output directory provided but not domain")
     if not argv.wordlist:
         if not argv.url:
             if not argv.stdin:
-                print(f"{ColorObj.bad} Use --help")
+                print(f"{Color.bad} Use --help")
                 exit()
             else:
                 return (line.rstrip('\n').strip(' ') for line in stdin.read().split('\n') if line)
@@ -30,9 +30,8 @@ def starter(argv):
         return (line.rstrip('\n').strip(' ') for line in open(argv.wordlist) if line)
 
 def output_writer(filename, to_write, filepath=None):
-    PathFunctions = PathFunction()
     if filepath:
-        output_file = open(PathFunctions.ender(filepath, '/') + filename + '.jscan', 'a')
+        output_file = open(ender(filepath, '/') + filename + '.jscan', 'a')
     else:
         output_file = open(filename, 'a')
     for jsresults in to_write:
