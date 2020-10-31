@@ -1,14 +1,12 @@
 #!/usr/bin/python3
 
-from traceback import print_exc
-from termcolor import colored
 from argparse import ArgumentParser
 from concurrent.futures import ThreadPoolExecutor
 
 from lib.JSExtract import JSExtract
 from lib.Functions import starter, output_writer
 
-parser = ArgumentParser(description=colored('Javascript Scanner', color='yellow'), epilog=colored("Enjoy bug hunting", color='yellow'))
+parser = ArgumentParser(description='\x1b[33mJScanner\x1b[0m', epilog='\x1b[33mEnjoy bug hunting\x1b[0m')
 input_group = parser.add_mutually_exclusive_group()
 output_group = parser.add_mutually_exclusive_group()
 input_group.add_argument('---', '---', action="store_true", dest="stdin", help="Stdin")

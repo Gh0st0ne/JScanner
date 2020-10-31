@@ -4,10 +4,10 @@
 [![Code Quality](https://www.code-inspector.com/project/15087/score/svg)](https://frontend.code-inspector.com/public/project/15087/JScanner/dashboard)
 
 ## Description
-A simple yet effective tool to find using custom and predefined regex for recon, vulnerabilites and secrets. It scans concurrently and effectively on all urls for secrets and vulnerabilites. Scan for regexes even on non-javascript endpoint and output from other tools can be easily fed to it. Who says python3 cant become fast, the ELF binary version of jscanner is optimized! 
+A simple yet effective tool to find using custom and predefined regex for recon, vulnerabilites and secrets. It scans concurrently and effectively on all urls for secrets and vulnerabilites. Scan for regexes even on non-javascript endpoint and output from other tools can be easily fed to it. 
 
 ## Features
-1. Concurrent scanning of all any endpoints for javascript using complex predefined regexes.
+1. Fast and parallel scanning of all any endpoints for javascript using complex predefined regexes.
 2. Ability to define custom regex both case sensitive and case insensitive.
 3. Regex for DOM XSS sinks, sources, web services, hidden parameters, endpoints etc are already there
 4. Its built with faster_than_requests, ~40x faster than requests.
