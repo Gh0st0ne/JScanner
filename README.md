@@ -54,4 +54,4 @@ Enjoy bug hunting
 3. Output from program as well as file output should be improved
 
 ## Note
-Download releases rather than git clone because developmental version may contain bugs. Releases are rather stable version!
+Download releases rather than git clone because developmental version may contain bugs. Releases are rather stable version! Also repetition needs to decreased in output.
